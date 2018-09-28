@@ -25,7 +25,6 @@ class Chaser {
     for (var i = 0; i < quantity; i++) {
       this.move();
       this.checkHasEaten();
-      board.draw();
     }
   }
 

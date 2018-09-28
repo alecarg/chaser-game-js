@@ -39,40 +39,37 @@ game.passTurn = function(){
 }
 
 game.onNewTurn = function(){
-   // chaser.onNewTurn();
 
    game.setTurnOwner();
-
-   helpers.forAllPlayers(function(i, p){
-     p.setCurrDistanceToChaser();
-     // p.onNewTurnFromLiveCode(); // p.onNewTurn();
-     board.draw();
-   });
+   game.turnOwner.onNewTurn();
+   board.draw();
    game.checkForDrownings();
 
+   // Others
+   helpers.forAllPlayers(function(i, p){
+     p.setCurrDistanceToChaser();
+   });
    // game.turnSpeed = game.turnSpeed * 0.98;
 }
 
 game.setTurnOwner = function(){
 
-	debugger;
-
 	if (game.turnOwner == null){
 		return game.turnOwner = players[0]; // set the first player as the  initial turn owner
 	}
 
-	var isCurrTurnOwnerAPlayer = (game.turnOwner instanceof Player);
-	if(!isCurrTurnOwnerAPlayer){ // then assume last turn was the chaser
+	var isCurrTurnOwnerTheChaser = (game.turnOwner instanceof Chaser);
+	if (isCurrTurnOwnerTheChaser){
 		return game.turnOwner = players[0]; // set the first player as the turn owner again
 	}
 
-	var isCurrTurnOwnerTheLastPlayer = (game.turnOwner.number == players.length);
+	var isCurrTurnOwnerTheLastPlayer = ((helpers.getPlayerIndexInPlayersArr(game.turnOwner) + 1) >= players.length);
 	if (isCurrTurnOwnerTheLastPlayer){
 		return game.turnOwner = chaser;
 	}
 
-	var nextPlayerUid = game.turnOwner.uid + 1;
-	game.turnOwner = players[nextPlayerUid]; // set the turn owner as the next player
+	var nextPlayerIndex = helpers.getPlayerIndexInPlayersArr(game.turnOwner) + 1;
+	game.turnOwner = players[nextPlayerIndex]; // set the turn owner as the next player
 }
 
 game.instantiatePlayers = function(){
@@ -94,11 +91,9 @@ game.checkForDrownings = function(){
     var currPlayerTile = helpers.getPlayerBoardTile(player);
     var isPlayerInWater = (currPlayerTile == 0);
     if (isPlayerInWater){
-        setTimeout(function(){
-          logger.log(player.number + ' has drowned.');
-          game.killPlayer(player, true);
-        }, 0);
-      }
+      logger.log(player.number + ' has drowned.');
+      game.killPlayer(player, true);
+    }
   });
 }
 

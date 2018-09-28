@@ -34,7 +34,7 @@ class Player {
   }
 
   onNewTurn(){
-    
+    this.onNewTurnFromLiveCode();
   }
 
   onNewTurnFromLiveCode(){
