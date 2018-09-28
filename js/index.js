@@ -4,8 +4,9 @@
   
 var game = {
   turn: 0,
+  turnOwner: null,
   turnSpeed: null,
-  turnSpeedInitial: 500,
+  turnSpeedInitial: 500
 };
 
 var players = [];

@@ -39,16 +39,40 @@ game.passTurn = function(){
 }
 
 game.onNewTurn = function(){
-   chaser.onNewTurn();
+   // chaser.onNewTurn();
+
+   game.setTurnOwner();
 
    helpers.forAllPlayers(function(i, p){
      p.setCurrDistanceToChaser();
-     p.onNewTurnFromLiveCode(); // p.onNewTurn();
+     // p.onNewTurnFromLiveCode(); // p.onNewTurn();
      board.draw();
    });
    game.checkForDrownings();
 
-   game.turnSpeed = game.turnSpeed * 0.98;
+   // game.turnSpeed = game.turnSpeed * 0.98;
+}
+
+game.setTurnOwner = function(){
+
+	debugger;
+
+	if (game.turnOwner == null){
+		return game.turnOwner = players[0]; // set the first player as the  initial turn owner
+	}
+
+	var isCurrTurnOwnerAPlayer = (game.turnOwner instanceof Player);
+	if(!isCurrTurnOwnerAPlayer){ // then assume last turn was the chaser
+		return game.turnOwner = players[0]; // set the first player as the turn owner again
+	}
+
+	var isCurrTurnOwnerTheLastPlayer = (game.turnOwner.number == players.length);
+	if (isCurrTurnOwnerTheLastPlayer){
+		return game.turnOwner = chaser;
+	}
+
+	var nextPlayerUid = game.turnOwner.uid + 1;
+	game.turnOwner = players[nextPlayerUid]; // set the turn owner as the next player
 }
 
 game.instantiatePlayers = function(){
