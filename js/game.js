@@ -91,14 +91,17 @@ game.checkForDrownings = function(){
     var currPlayerTile = helpers.getPlayerBoardTile(player);
     var isPlayerInWater = (currPlayerTile == 0);
     if (isPlayerInWater){
-      logger.log(player.number + ' has drowned.');
-      game.killPlayer(player, true);
+      game.killPlayer(player, 'It drowned. ');
     }
   });
 }
 
-game.killPlayer = function(player){
-    logger.log(player.number + ' has died. It survived ' + game.turn + ' turns.');
+game.killPlayer = function(player, reason){
+	var message = player.number + ' has died. ';
+	message += reason ? reason : '';
+	message += 'It survived ' + game.turn + ' turns.';
+    logger.log(message);
+
     var playerPosInArray = helpers.getPlayerIndexInPlayersArr(player);
     players.splice(playerPosInArray, 1);
 }

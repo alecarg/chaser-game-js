@@ -56,7 +56,7 @@ class Chaser {
       });
 
       if (playerOnChaserTile){
-        game.killPlayer(playerOnChaserTile);
+        game.killPlayer(playerOnChaserTile, 'It was caught by the chaser. ');
       }
     }, 0);
   }
