@@ -20,17 +20,27 @@ class Player {
 
   move(direction){
     if (direction == 'left'){
-      this.pos.x--;
+      if (board.isEmptyTile(this.pos.x - 1, this.pos.y)){
+      	return this.pos.x--;
+      }
     } else
     if (direction == 'right'){
-      this.pos.x++;
+      if (board.isEmptyTile(this.pos.x + 1, this.pos.y)){
+        return this.pos.x++;
+      }
     } else
     if (direction == 'up'){
-      this.pos.y--;
+      if (board.isEmptyTile(this.pos.x, this.pos.y - 1)){
+        return this.pos.y--;
+      }
     } else
     if (direction == 'down'){
-      this.pos.y++;
+      if (board.isEmptyTile(this.pos.x, this.pos.y + 1)){
+        return this.pos.y++;
+      }
     }
+
+    logger.log('Player ' + this.number + ' has not moved this turn as the target tile was occupied.');
   }
 
   onNewTurn(){

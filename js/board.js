@@ -95,3 +95,10 @@ board.getTile = function(x, y){
   }
   return tile;
 }
+
+board.isEmptyTile = function(x, y){
+  var isPlayerInTile = !!helpers.getPlayerByCoords(x, y);
+  var isChaserInTile = !!(chaser.pos.x == x && chaser.pos.y == y);
+  var isEmptyTile = (!isPlayerInTile && !isChaserInTile);
+  return isEmptyTile;
+}
