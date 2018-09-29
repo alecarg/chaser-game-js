@@ -44,6 +44,7 @@ game.onNewTurn = function(){
    game.turnOwner.onNewTurn();
    board.draw();
    game.checkForDrownings();
+   ui.cameraFollowChaser();
 
    // Others
    helpers.forAllPlayers(function(i, p){

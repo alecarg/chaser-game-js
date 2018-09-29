@@ -17,6 +17,17 @@ ui.initialiseCodeUI = function(){
   });
 }
 
+ui.cameraFollowChaser = function(){
+	var windowHeight = $(window).height();
+	var totalTilesH = board.tiles[0].length;
+	var ratioWindowToTilesH = (windowHeight / totalTilesH);
+	var cameraPositionH = (ratioWindowToTilesH * ((chaser.pos.y + chaser.pos.x) / 2));
+	
+	var animationSpeed = (game.turnSpeed * 0.95);
+
+	$("html, body").animate({scrollTop: cameraPositionH }, animationSpeed, 'swing', function() {});
+}
+
 logger.log = function(message, attentionCalling){
   var log = document.querySelector('.log');
   var attentionCallingClass = attentionCalling ? 'attention-calling' : '';
