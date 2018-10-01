@@ -55,20 +55,29 @@ game.onNewTurn = function(){
 
 game.setTurnOwner = function(){
 
+	// On new game
 	if (game.turnOwner == null){
-		return game.turnOwner = players[0]; // set the first player as the  initial turn owner
+		return game.turnOwner = players[0];
 	}
 
+	// Chaser to (Player or Chaser again if extra turn)
 	var isCurrTurnOwnerTheChaser = (game.turnOwner instanceof Chaser);
 	if (isCurrTurnOwnerTheChaser){
-		return game.turnOwner = players[0]; // set the first player as the turn owner again
+		var isChaserExtraTurn = chaser.isExtraTurnsRemainig();
+		if (isChaserExtraTurn){
+			return game.turnOwner = chaser;
+		} else {
+			return game.turnOwner = players[0]; // turn cycle starts again
+		}
 	}
 
+	// Player to Chaser
 	var isCurrTurnOwnerTheLastPlayer = ((helpers.getPlayerIndexInPlayersArr(game.turnOwner) + 1) >= players.length);
 	if (isCurrTurnOwnerTheLastPlayer){
 		return game.turnOwner = chaser;
 	}
 
+	// Player to Player
 	var nextPlayerIndex = helpers.getPlayerIndexInPlayersArr(game.turnOwner) + 1;
 	game.turnOwner = players[nextPlayerIndex]; // set the turn owner as the next player
 }
@@ -84,7 +93,7 @@ game.instantiatePlayers = function(){
 }
 
 game.instantiateChaser = function(){
-  chaser = new Chaser(1, 5);
+  chaser = new Chaser(0, 0);
 }
 
 game.checkForDrownings = function(){
