@@ -3,29 +3,12 @@ class Chaser {
     this.pos = {};
     this.pos.x = posx;
     this.pos.y = posy;
+    this.extraTurns = 0;
   }
 
   onNewTurn(){
-    var turnsToTake = 1;
-
-    if (game.turn >= 50){
-      if (game.turn == 50){ logger.log('Game difficulty now MEDIUM. Chaser moves 2 squares.', 'attentionCalling'); };
-      turnsToTake = 2;
-    }
-    
-    if (game.turn >= 100){
-      if (game.turn == 100){ logger.log('Game difficulty now HARD. Chaser moves 3 squares.', 'attentionCalling') };
-      turnsToTake = 3;
-    }
-
-    this.takeTurn(turnsToTake);
-  }
-
-  takeTurn(quantity){
-    for (var i = 0; i < quantity; i++) {
-      this.move();
-      this.checkHasEaten();
-    }
+    this.move();
+    this.checkHasEaten();
   }
 
   move(){
@@ -41,23 +24,35 @@ class Chaser {
 
   findClosestPlayer(){
     var playersSortedByDistance = _.sortBy(players, [function(p) { return p.distanceToChaser.total; }]);
-    // console.log('closest: ' + playersSortedByDistance[0].uid + '(uid) / ' + playersSortedByDistance[0].number + '(number)');
     return playersSortedByDistance[0];
   }
 
   checkHasEaten(){
-    setTimeout(function(){
-      var playerOnChaserTile = _.find(players, function(player) { 
-        if (player.pos.x === chaser.pos.x && player.pos.y === chaser.pos.y){
-          return player;
-        } else {
-          return null;
-        }
-      });
-
-      if (playerOnChaserTile){
-        game.killPlayer(playerOnChaserTile, 'It was caught by the chaser. ');
+    var playerOnChaserTile = _.find(players, function(player) { 
+      if (player.pos.x === chaser.pos.x && player.pos.y === chaser.pos.y){
+        return player;
+      } else {
+        return null;
       }
-    }, 0);
+    });
+
+    if (playerOnChaserTile){
+      game.killPlayer(playerOnChaserTile, 'It was caught by the chaser. ');
+    }
+  }
+
+  isExtraTurnsRemainig(){
+    if (this.extraTurns > 0){
+      this.extraTurns--;
+      return true;
+    } else {
+      if (game.turn >= 50){
+        this.extraTurns = 1;
+      } else
+      if (game.turn >= 100){
+        this.extraTurns = 2;
+      }
+      return false;
+    }
   }
 }
