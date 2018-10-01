@@ -20,18 +20,6 @@ game.restart = function(){
 
 game.passTurn = function(){
   game.turn++;
-  document.querySelector('.turn-ui b').innerHTML = game.turn;
-
-  if (players.length < 1){
-    alert('Game over. Your escapers survived: ' + game.turn + ' turns.');
-    game.restart();
-  }
-
-  if (game.turn > 1000){
-    alert('Game timeout. 1000 turns are way too many.');
-    game.restart(); 
-  }
-
   setTimeout(function(){
     game.passTurn();
     game.onNewTurn();
@@ -40,17 +28,20 @@ game.passTurn = function(){
 
 game.onNewTurn = function(){
 
-   game.setTurnOwner();
-   game.turnOwner.onNewTurn();
-   board.draw();
-   game.checkForDrownings();
-   ui.cameraFollowChaser();
+  ui.updateTurn();
+  game.checkTurnBasedConditions();
+  game.setTurnOwner();
+  game.turnOwner.onNewTurn();
+  board.draw();
+  
+  game.checkForDrownings();
+  game.checkIfGameOver();
 
-   // Others
-   helpers.forAllPlayers(function(i, p){
-     p.setCurrDistanceToChaser();
-   });
-   // game.turnSpeed = game.turnSpeed * 0.98;
+  ui.cameraFollowChaser();
+  helpers.forAllPlayers(function(i, p){
+    p.setCurrDistanceToChaser();
+  });
+  // game.accelerateTurnSpeed();
 }
 
 game.setTurnOwner = function(){
@@ -114,6 +105,8 @@ game.killPlayer = function(player, reason){
 
     var playerPosInArray = helpers.getPlayerIndexInPlayersArr(player);
     players.splice(playerPosInArray, 1);
+}
+
 game.checkTurnBasedConditions = function(){
   if (game.turn == 50){
   	logger.log('Game difficulty now MEDIUM. Chaser has 2 turns per cycle now.', 'attentionCalling');
@@ -126,4 +119,14 @@ game.checkTurnBasedConditions = function(){
     game.restart(); 
   }
 }
+
+game.checkIfGameOver = function(){
+  if (players.length < 1){
+    alert('Game over. Your escapers survived: ' + game.turn + ' turns.');
+    game.restart();
+  }
+}
+
+game.accelerateTurnSpeed = function(){
+	game.turnSpeed = game.turnSpeed * 0.98;
 }

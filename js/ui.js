@@ -28,6 +28,10 @@ ui.cameraFollowChaser = function(){
 	$("html, body").animate({scrollTop: cameraPositionH }, animationSpeed, 'swing', function() {});
 }
 
+ui.updateTurn = function(){
+	document.querySelector('.turn-ui b').innerHTML = game.turn;
+}
+
 logger.log = function(message, attentionCalling){
   var log = document.querySelector('.log');
   var attentionCallingClass = attentionCalling ? 'attention-calling' : '';
