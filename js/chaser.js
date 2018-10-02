@@ -19,7 +19,13 @@ class Chaser {
     var axis = (distanceXToClosestPlayer > distanceYToClosestPlayer) ? 'x' : 'y'; // axis most lagging
     var directionDiff = (chaser.pos[axis] > closestPlayer.pos[axis]) ? -1 : 1;
     
-    chaser.pos[axis] = chaser.pos[axis] + directionDiff;
+    var targetTilePos = (axis == 'x') ? {'x': (chaser.pos.x + directionDiff), 'y': chaser.pos.y} : {'y': (chaser.pos.y + directionDiff), 'x': chaser.pos.x};
+
+    if (board.isTileInMapBoundaries(targetTilePos.x, targetTilePos.y)){
+      chaser.pos[axis] = chaser.pos[axis] + directionDiff;
+    } else {
+      logger.log('Chaser has not moved this turn as the target tile was outside the map boundaries.');
+    }
   }
 
   findClosestPlayer(){

@@ -20,27 +20,27 @@ class Player {
 
   move(direction){
     if (direction == 'left'){
-      if (board.isEmptyTile(this.pos.x - 1, this.pos.y)){
+      if (board.isTileSuitableForMovement(this.pos.x - 1, this.pos.y)){
       	return this.pos.x--;
       }
     } else
     if (direction == 'right'){
-      if (board.isEmptyTile(this.pos.x + 1, this.pos.y)){
+      if (board.isTileSuitableForMovement(this.pos.x + 1, this.pos.y)){
         return this.pos.x++;
       }
     } else
     if (direction == 'up'){
-      if (board.isEmptyTile(this.pos.x, this.pos.y - 1)){
+      if (board.isTileSuitableForMovement(this.pos.x, this.pos.y - 1)){
         return this.pos.y--;
       }
     } else
     if (direction == 'down'){
-      if (board.isEmptyTile(this.pos.x, this.pos.y + 1)){
+      if (board.isTileSuitableForMovement(this.pos.x, this.pos.y + 1)){
         return this.pos.y++;
       }
     }
 
-    logger.log('Player ' + this.number + ' has not moved this turn as the target tile was occupied.');
+    logger.log('Player ' + this.number + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
   }
 
   onNewTurn(){

@@ -87,16 +87,28 @@ board.drawCharacters = function(ctx, i, j, drawX, drawY) {
 }
 
 board.getTile = function(x, y){
+  var tile = null;
   try {
-    var tile = board.tiles[x][y];
+    tile = board.tiles[x][y];
   } catch(e){
-    console.log('Tried to get tile outside of map. Restarting.');
-    game.restart();
+    console.error('Tried to get tile outside of map.');
   }
   return tile;
 }
 
-board.isEmptyTile = function(x, y){
+board.isTileSuitableForMovement = function(x, y){
+  if (board.isTileInMapBoundaries(x, y) && board.isTileEmptyOfCharacters(x, y)){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+board.isTileInMapBoundaries = function(x, y){
+  return (board.getTile(x, y) != null);
+}
+
+board.isTileEmptyOfCharacters = function(x, y){
   var isPlayerInTile = !!helpers.getPlayerByCoords(x, y);
   var isChaserInTile = !!(chaser.pos.x == x && chaser.pos.y == y);
   var isEmptyTile = (!isPlayerInTile && !isChaserInTile);
