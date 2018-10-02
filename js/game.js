@@ -6,8 +6,8 @@ game.init = function(){
   game.instantiateChaser();
   board.create();
   game.passTurn();
-
   ui.initialiseCodeUI();
+  ui.cameraFollowChaser();
 }
 
 game.restart = function(){
@@ -15,6 +15,7 @@ game.restart = function(){
   game.turnSpeed = game.turnSpeedInitial;
   game.instantiatePlayers();
   game.instantiateChaser();
+  ui.cameraFollowChaser();
   logger.clearLog();
 }
 
@@ -37,7 +38,6 @@ game.onNewTurn = function(){
   game.checkForDrownings();
   game.checkIfGameOver();
 
-  ui.cameraFollowChaser();
   helpers.forAllPlayers(function(i, p){
     p.setCurrDistanceToChaser();
   });
@@ -58,7 +58,8 @@ game.setTurnOwner = function(){
 		if (isChaserExtraTurn){
 			return game.turnOwner = chaser;
 		} else {
-			return game.turnOwner = players[0]; // turn cycle starts again
+			game.onNewTurnCycle();
+			return game.turnOwner = players[0];
 		}
 	}
 
@@ -71,6 +72,10 @@ game.setTurnOwner = function(){
 	// Player to Player
 	var nextPlayerIndex = helpers.getPlayerIndexInPlayersArr(game.turnOwner) + 1;
 	game.turnOwner = players[nextPlayerIndex]; // set the turn owner as the next player
+}
+
+game.onNewTurnCycle = function(){
+	ui.cameraFollowChaser();
 }
 
 game.instantiatePlayers = function(){

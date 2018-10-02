@@ -18,14 +18,19 @@ ui.initialiseCodeUI = function(){
 }
 
 ui.cameraFollowChaser = function(){
-	var windowHeight = $(window).height();
-	var totalTilesH = board.tiles[0].length;
-	var ratioWindowToTilesH = (windowHeight / totalTilesH);
-	var cameraPositionH = (ratioWindowToTilesH * ((chaser.pos.y + chaser.pos.x) / 2));
-	
-	var animationSpeed = (game.turnSpeed * 0.95);
+	var tilesInOneRow = board.tiles[0].length;
 
-	$("html, body").animate({scrollTop: cameraPositionH }, animationSpeed, 'swing', function() {});
+  var docHeight = $(document).height();
+	var stepWindowToTilesH = (docHeight / tilesInOneRow);
+	var cameraPositionH = ((stepWindowToTilesH * 0.66) * ((chaser.pos.y + chaser.pos.x) / 2));
+
+  var docWidth = $(document).width();
+  var windowViewport = $(window).width();
+  var stepWindowToTilesW = (docWidth / tilesInOneRow);
+  var cameraPositionW = ((docWidth / 2) - (windowViewport / 2)) - (stepWindowToTilesW * ((chaser.pos.y - chaser.pos.x) / 2));
+	
+	var animationSpeed = (game.turnSpeed * 0.9);
+	$("html, body").animate({ scrollTop: cameraPositionH, scrollLeft: cameraPositionW }, animationSpeed, 'swing', function(){});
 }
 
 ui.updateTurn = function(){
