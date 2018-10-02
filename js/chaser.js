@@ -48,10 +48,10 @@ class Chaser {
     } else {
       if (game.turn >= 50){
         this.extraTurns = 1;
-      } else
-      if (game.turn >= 100){
-        this.extraTurns = 2;
       }
+      // if (game.turn >= 100){
+      //   this.extraTurns = 2;
+      // }
       return false;
     }
   }
