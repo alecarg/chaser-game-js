@@ -8,7 +8,6 @@ class Chaser {
 
   onNewTurn(){
     this.move();
-    this.checkHasEaten();
   }
 
   move(){

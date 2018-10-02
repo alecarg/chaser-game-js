@@ -34,14 +34,15 @@ game.onNewTurn = function(){
   game.setTurnOwner();
   game.turnOwner.onNewTurn();
   board.draw();
-  
+
+  chaser.checkHasEaten();  
   game.checkForDrownings();
   game.checkIfGameOver();
+  // game.accelerateTurnSpeed();
 
   helpers.forAllPlayers(function(i, p){
     p.setCurrDistanceToChaser();
   });
-  // game.accelerateTurnSpeed();
 }
 
 game.setTurnOwner = function(){
