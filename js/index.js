@@ -5,7 +5,9 @@ var ui = {};
 var helpers = {};
 
 var game = {
+  isPaused: false,
   turn: 0,
+  turnInterval: null,
   turnOwner: null,
   turnSpeed: null,
   turnSpeedInitial: 500

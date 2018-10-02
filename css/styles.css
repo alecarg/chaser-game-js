@@ -45,7 +45,8 @@ canvas.zoomed {
 .log p.attention-calling {
   color: green;
 }
-.restart {
+.restart,
+.pause {
   position: relative;
   left: 0px;
   top: -10px;

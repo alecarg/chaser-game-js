@@ -1,29 +1,41 @@
 game.init = function(){
   window.removeEventListener('load', game.init);
-
-  game.turnSpeed = game.turnSpeedInitial;
-  game.instantiatePlayers();
-  game.instantiateChaser();
   board.create();
-  game.passTurn();
   ui.initialiseCodeUI();
-  ui.cameraFollowChaser();
+  game.restart();
+  game.passTurn();
 }
 
 game.restart = function(){
   game.turn = 0;
   game.turnSpeed = game.turnSpeedInitial;
+  game.turnOwner = null;
   game.instantiatePlayers();
   game.instantiateChaser();
   ui.cameraFollowChaser();
   logger.clearLog();
 }
 
+game.pause = function(){
+	var btn = document.querySelector('button.pause');
+	if (game.isPaused){
+		game.isPaused = false;
+		game.passTurn();
+		btn.innerHTML = 'Pause';
+	} else {
+		game.isPaused = true;
+		clearInterval(game.turnInterval);
+		btn.innerHTML = 'Unpause';
+	}
+}
+
 game.passTurn = function(){
-  game.turn++;
-  setTimeout(function(){
+  clearInterval(game.turnInterval);
+  if (game.isPaused){ return; }
+  game.turnInterval = setInterval(function(){
+  	game.turn++;
+  	game.onNewTurn();
     game.passTurn();
-    game.onNewTurn();
   }, game.turnSpeed);
 }
 
