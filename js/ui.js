@@ -17,6 +17,10 @@ ui.initialiseCodeUI = function(){
   });
 }
 
+ui.getPlayerInputCode = function(){
+  return codeMirror.getValue();
+}
+
 ui.cameraFollowChaser = function(){
 	var tilesInOneRow = board.tiles[0].length;
 

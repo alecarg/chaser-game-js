@@ -44,61 +44,53 @@ class Player {
   }
 
   onNewTurn(){
-    this.onNewTurnFromLiveCode();
     logger.curateLog();
+    this.runCodeFromInput();
   }
 
-  onNewTurnFromLiveCode(){
+  runCodeFromInput(){
 
-  	// Keep a reference
-  	const logger = window.logger;
+    // Add helpers
+    const me = {
+      number: this.number,
+      pos: this.pos,
+      move: this.move,
+      whereIsChaser: this.whereIsChaser
+    };
+    const log = function(toLog){
+      window.logger.log('Log: ' + toLog, 'player-log')
+    };
 
-	// Expose
-  	const me = {
-  		number: this.number,
-  		pos: this.pos,
-  		move: this.move,
-  		whereIsChaser: this.whereIsChaser
-  	};
-  	const chaser = {
-  		pos: window.chaser.pos
-  	};
-  	const log = function(toLog){
-  		logger.log('Log: ' + toLog, 'player-log')
-  	};
+    // Unexpose
+    const Chaser = {};
+    const players = {};
+    const Player = {};
+    const helpers = {};
+    const game = {};
 
-  	// Unexpose
-  	const Chaser = {};
-  	const players = {};
-  	const Player = {};
-	const helpers = {};
-	const ui = {};
-	const game = {};
-	const alert = function(){};
+    // Half-expose
+    const chaser = {
+      pos: window.chaser.pos
+    };
+    const ui = {
+      getPlayerInputCode: window.ui.getPlayerInputCode
+    };
 
-  	// Clear errors
-  	var errorInLogger = document.querySelector('.log p.error');
-	if (errorInLogger){ errorInLogger.outerHTML = ''; }
+    // Blacklisted words in code
+    var blacklistedWords = ['window', 'document', 'console', 'alert', 'debugger'];
+    var isPlayerInputCodeSafe = _.every(blacklistedWords, function(word){ return (ui.getPlayerInputCode().indexOf(word) == -1) });
+    if (!isPlayerInputCodeSafe){
+      return window.logger.log('Your code will not execute if you try to use window, document, console, alert or debugger.', 'error');
+    }
 
-	// Clear player log
-  	var playerLogInLogger = document.querySelectorAll('.log p.player-log');
-	if (playerLogInLogger.length){
-		for (var i = 0; i < playerLogInLogger.length; i++) {
-			playerLogInLogger[i].outerHTML = '';
-		}
-	}
-
-	// Run player's code
-	var windowObjectUsed = (codeMirror.getValue().indexOf('window') > -1);
-  	if (windowObjectUsed){
-  		return logger.log('Your code will not execute if you try to access the window object.', 'error');
-  	} else {
-	  	try {  		
-	    	eval(codeMirror.getValue());
-	  	} catch (e){
-	  		logger.log('Your player code has thrown an error: ' + e, 'error');
-	  	}
-  	}
+    // Run player's code
+    try {
+      (function(){
+        eval(ui.getPlayerInputCode());
+      })(); // self executing function removes the 'this' reference to the player instance
+    } catch (e){
+      window.logger.log('Your player code has thrown an error: ' + e, 'error');
+    }
   }
 
   whereIsChaser(){
