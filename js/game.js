@@ -148,3 +148,10 @@ game.checkIfGameOver = function(){
 game.accelerateTurnSpeed = function(){
 	game.turnSpeed = game.turnSpeed * 0.98;
 }
+game.saveCode = function(){
+  // http://stuk.github.io/jszip/ ?
+  // http://jsfiddle.net/VBJ9h/319/ ? (encode to base64 and force a click?)
+  // http://danml.com/download.html ?
+  // + localStorage
+  // + cookie?
+}
