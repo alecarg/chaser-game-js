@@ -45,6 +45,7 @@ class Player {
 
   onNewTurn(){
     this.onNewTurnFromLiveCode();
+    logger.curateLog();
   }
 
   onNewTurnFromLiveCode(){

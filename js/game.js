@@ -133,14 +133,14 @@ game.checkTurnBasedConditions = function(){
   // 	logger.log('Game difficulty now HARD. Chaser has 3 turns per cycle now.', 'attention-calling');
   // }
   if (game.turn > 1000){
-    alert('Game timeout. 1000 turns are way too many.');
+    console.log('Game timeout. 1000 turns are way too many.');
     game.restart(); 
   }
 }
 
 game.checkIfGameOver = function(){
   if (players.length < 1){
-    alert('Game over. Your escapers survived: ' + game.turn + ' turns.');
+    console.log('Game over. Your escapers survived: ' + game.turn + ' turns.');
     game.restart();
   }
 }
