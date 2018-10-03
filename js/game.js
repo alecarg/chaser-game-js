@@ -51,10 +51,6 @@ game.onNewTurn = function(){
   game.checkForDrownings();
   game.checkIfGameOver();
   // game.accelerateTurnSpeed();
-
-  helpers.forAllPlayers(function(i, p){
-    p.setCurrDistanceToChaser();
-  });
 }
 
 game.setTurnOwner = function(){
@@ -84,11 +80,14 @@ game.setTurnOwner = function(){
 
 	// Player to Player
 	var nextPlayerIndex = helpers.getPlayerIndexInPlayersArr(game.turnOwner) + 1;
-	game.turnOwner = players[nextPlayerIndex]; // set the turn owner as the next player
+	return game.turnOwner = players[nextPlayerIndex]; // set the turn owner as the next player
 }
 
 game.onNewTurnCycle = function(){
 	ui.cameraFollowChaser();
+  helpers.forAllPlayers(function(i, p){
+    p.movesThisTurn = 1;
+  });
 }
 
 game.instantiatePlayers = function(){
@@ -148,6 +147,7 @@ game.checkIfGameOver = function(){
 game.accelerateTurnSpeed = function(){
 	game.turnSpeed = game.turnSpeed * 0.98;
 }
+
 game.saveCode = function(){
   // http://stuk.github.io/jszip/ ?
   // http://jsfiddle.net/VBJ9h/319/ ? (encode to base64 and force a click?)

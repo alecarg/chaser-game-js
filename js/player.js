@@ -2,14 +2,11 @@ class Player {
   constructor(posx, posy, uid){
     this.uid = uid;
     this.number = uid + 1;
-
     this.pos = {};
     this.pos.x = posx;
     this.pos.y = posy;
-
     this.distanceToChaser = {};
-
-    this.direction = null;
+    this.movesThisTurn = 1;
   }
 
   setCurrDistanceToChaser(){
@@ -19,28 +16,31 @@ class Player {
   }
 
   move(direction){
+
+    var self = helpers.getPlayerByPlayerUid(this.uid); // elevates instance access from me.foo() when using this
+
+    var targetPos;
     if (direction == 'left'){
-      if (board.isTileSuitableForMovement(this.pos.x - 1, this.pos.y)){
-      	return this.pos.x--;
-      }
+      targetPos = { x: self.pos.x - 1, y: self.pos.y };
     } else
     if (direction == 'right'){
-      if (board.isTileSuitableForMovement(this.pos.x + 1, this.pos.y)){
-        return this.pos.x++;
-      }
+      targetPos = { x: self.pos.x + 1, y: self.pos.y };
     } else
     if (direction == 'up'){
-      if (board.isTileSuitableForMovement(this.pos.x, this.pos.y - 1)){
-        return this.pos.y--;
-      }
+      targetPos = { x: self.pos.x, y: self.pos.y - 1 };
     } else
     if (direction == 'down'){
-      if (board.isTileSuitableForMovement(this.pos.x, this.pos.y + 1)){
-        return this.pos.y++;
-      }
+      targetPos = { x: self.pos.x, y: self.pos.y + 1 };
     }
 
-    logger.log('Player ' + this.number + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
+    var isMovementValid = (self.hasMovesThisTurn() && board.isTileSuitableForMovement(targetPos.x, targetPos.y));
+    if (isMovementValid){
+    	self.pos = targetPos;
+      self.movesThisTurn--;
+      self.setCurrDistanceToChaser();
+    } else {
+      logger.log('Player ' + self.number + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
+    }
   }
 
   onNewTurn(){
@@ -48,12 +48,16 @@ class Player {
     this.runCodeFromInput();
   }
 
+  hasMovesThisTurn(){
+    return this.movesThisTurn > 0;
+  }
+
   runCodeFromInput(){
 
     // Add helpers
     const me = {
-      number: this.number,
-      pos: this.pos,
+      uid: _.clone(this.uid), // not for the player to query, but for us to identify and elevate access in move()
+      pos: _.clone(this.pos),
       move: this.move,
       whereIsChaser: this.whereIsChaser
     };
@@ -67,26 +71,24 @@ class Player {
     const Player = {};
     const helpers = {};
     const game = {};
+    const ui = {};
 
     // Half-expose
     const chaser = {
-      pos: window.chaser.pos
-    };
-    const ui = {
-      getPlayerInputCode: window.ui.getPlayerInputCode
+      pos: _.clone(window.chaser.pos)
     };
 
     // Blacklisted words in code
-    var blacklistedWords = ['window', 'document', 'console', 'alert', 'debugger'];
-    var isPlayerInputCodeSafe = _.every(blacklistedWords, function(word){ return (ui.getPlayerInputCode().indexOf(word) == -1) });
+    var blacklistedWords = ['eval', 'window', 'document', 'console', 'alert', 'debugger'];
+    var isPlayerInputCodeSafe = _.every(blacklistedWords, function(word){ return (window.ui.getPlayerInputCode().indexOf(word) == -1) });
     if (!isPlayerInputCodeSafe){
-      return window.logger.log('Your code will not execute if you try to use window, document, console, alert or debugger.', 'error');
+      return window.logger.log('Your code will not execute if you try to use eval, window, document, console, alert or debugger.', 'error');
     }
 
     // Run player's code
     try {
       (function(){
-        eval(ui.getPlayerInputCode());
+        eval(window.ui.getPlayerInputCode());
       })(); // self executing function removes the 'this' reference to the player instance
     } catch (e){
       window.logger.log('Your player code has thrown an error: ' + e, 'error');
