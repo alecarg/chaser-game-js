@@ -37,10 +37,9 @@ ui.updateTurn = function(){
 	document.querySelector('.turn-ui b').innerHTML = game.turn;
 }
 
-logger.log = function(message, attentionCalling){
+logger.log = function(message, elClass){
   var log = document.querySelector('.log');
-  var attentionCallingClass = attentionCalling ? 'attention-calling' : '';
-  log.innerHTML += '<p class="' + attentionCallingClass + '">' + message + '</p>';
+  log.innerHTML += '<p class="' + elClass + '">' + message + '</p>';
   log.scrollTop = log.scrollHeight;
 }
 

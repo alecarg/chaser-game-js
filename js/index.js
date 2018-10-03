@@ -28,10 +28,13 @@ board.mapX = (board.canvasWidth / 2) - (board.tileW / 2);
 board.mapY = board.tileH;
 
 var startingCode = "\
-  var fiftyFifty = ((Math.random() * 100) > 50);\n\
-  if (fiftyFifty){\n\
-    this.move('right');\n\
-  } else {\n\
-    this.move('down');\n\
-  }\n\
+log('Chaser: ' + chaser.pos.x + ',' + chaser.pos.y);\n\
+log(me.whereIsChaser());\n\
+\n\
+var fiftyFifty = ((Math.random() * 100) > 50);\n\
+if (fiftyFifty){\n\
+  me.move('right');\n\
+} else {\n\
+  me.move('down');\n\
+}\n\
 ";

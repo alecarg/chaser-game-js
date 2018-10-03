@@ -48,6 +48,59 @@ class Player {
   }
 
   onNewTurnFromLiveCode(){
-    eval(codeMirror.getValue());
+
+  	// Keep a reference
+  	const logger = window.logger;
+
+	// Expose
+  	const me = {
+  		number: this.number,
+  		pos: this.pos,
+  		move: this.move,
+  		whereIsChaser: this.whereIsChaser
+  	};
+  	const chaser = {
+  		pos: window.chaser.pos
+  	};
+  	const log = function(toLog){
+  		logger.log('Log: ' + toLog, 'player-log')
+  	};
+
+  	// Unexpose
+  	const Chaser = {};
+  	const players = {};
+  	const Player = {};
+	const helpers = {};
+	const ui = {};
+	const game = {};
+	const alert = function(){};
+
+  	// Clear errors
+  	var errorInLogger = document.querySelector('.log p.error');
+	if (errorInLogger){ errorInLogger.outerHTML = ''; }
+
+	// Clear player log
+  	var playerLogInLogger = document.querySelectorAll('.log p.player-log');
+	if (playerLogInLogger.length){
+		for (var i = 0; i < playerLogInLogger.length; i++) {
+			playerLogInLogger[i].outerHTML = '';
+		}
+	}
+
+	// Run player's code
+	var windowObjectUsed = (codeMirror.getValue().indexOf('window') > -1);
+  	if (windowObjectUsed){
+  		return logger.log('Your code will not execute if you try to access the window object.', 'error');
+  	} else {
+	  	try {  		
+	    	eval(codeMirror.getValue());
+	  	} catch (e){
+	  		logger.log('Your player code has thrown an error: ' + e, 'error');
+	  	}
+  	}
+  }
+
+  whereIsChaser(){
+  	return 'right behind you';
   }
 }

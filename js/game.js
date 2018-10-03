@@ -116,7 +116,7 @@ game.checkForDrownings = function(){
 }
 
 game.killPlayer = function(player, reason){
-	var message = player.number + ' has died. ';
+	var message = 'Player ' + player.number + ' has died. ';
 	message += reason ? reason : '';
 	message += 'It survived ' + game.turn + ' turns.';
     logger.log(message);
@@ -127,10 +127,10 @@ game.killPlayer = function(player, reason){
 
 game.checkTurnBasedConditions = function(){
   if (game.turn == 50){
-  	logger.log('Game difficulty now MEDIUM. Chaser has 2 turns per cycle now.', 'attentionCalling');
+  	logger.log('Game difficulty now MEDIUM. Chaser has 2 turns per cycle now.', 'attention-calling');
   }
   // if (game.turn == 100){
-  // 	logger.log('Game difficulty now HARD. Chaser has 3 turns per cycle now.', 'attentionCalling');
+  // 	logger.log('Game difficulty now HARD. Chaser has 3 turns per cycle now.', 'attention-calling');
   // }
   if (game.turn > 1000){
     alert('Game timeout. 1000 turns are way too many.');

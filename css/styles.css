@@ -45,6 +45,12 @@ canvas.zoomed {
 .log p.attention-calling {
   color: green;
 }
+.log p.error {
+  color: red;
+}
+.log p.player-log {
+  color: blue;
+}
 .restart,
 .pause {
   position: relative;
