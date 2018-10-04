@@ -26,6 +26,12 @@ canvas.zoomed {
   right: 10px;
   width: 45%;
 }
+.compass {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  width: 135px;
+}
 .log {
   height: 150px;
   width: 100%;

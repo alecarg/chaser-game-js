@@ -128,13 +128,6 @@ game.checkTurnBasedConditions = function(){
   if (game.turn == 50){
   	logger.log('Game difficulty now MEDIUM. Chaser has 2 turns per cycle now.', 'attention-calling');
   }
-  // if (game.turn == 100){
-  // 	logger.log('Game difficulty now HARD. Chaser has 3 turns per cycle now.', 'attention-calling');
-  // }
-  if (game.turn > 1000){
-    console.log('Game timeout. 1000 turns are way too many.');
-    game.restart(); 
-  }
 }
 
 game.checkIfGameOver = function(){
