@@ -18,7 +18,7 @@ class Player {
 
   move(direction){
 
-    var self = helpers.getPlayerByPlayerUid(this.uid); // elevates instance access from me.foo() when using this
+    var self = helpers.getPlayerByPlayerUid(this.uid); // *1
 
     var targetPos;
     if (direction == 'left'){
@@ -43,8 +43,8 @@ class Player {
       return logger.log('Player ' + self.number + ' has not moved this turn as the game is paused.')
     }
 
-    	self.pos = targetPos;
-      self.movesThisTurn--;
+    self.pos = targetPos;
+    self.movesThisTurn--;
   }
 
   onNewTurn(){
@@ -111,6 +111,42 @@ class Player {
   }
 
   whereIsChaser(){
-  	return 'right behind you';
+
+    var self = helpers.getPlayerByPlayerUid(this.uid); // *1
+
+  	if (self.distanceToChaser.x > self.distanceToChaser.y){
+      if ((self.pos.x - chaser.pos.x) > 0){
+        return 'west';
+      } else {
+        return 'east';
+      }
+    } else
+    if (self.distanceToChaser.x < self.distanceToChaser.y){
+      if ((self.pos.y - chaser.pos.y) > 0){
+        return 'north';
+      } else {
+        return 'south';
+      }
+    } else
+    if (self.distanceToChaser.x == self.distanceToChaser.y){
+      if (self.pos.x > chaser.pos.x && self.pos.y > chaser.pos.y){
+        return 'north-west';
+      }
+      if (self.pos.x < chaser.pos.x && self.pos.y > chaser.pos.y){
+        return 'south-west'; 
+      }
+      if (self.pos.x > chaser.pos.x && self.pos.y < chaser.pos.y){
+        return 'north-east';
+      }
+      if (self.pos.x < chaser.pos.x && self.pos.y < chaser.pos.y){
+        return 'south-east';
+      }
+    }
   }
 }
+
+/*
+ *  "Elevates the player's access" to be able to call it's own methods, as the me reference
+ *  given to the player and evaluated through eval() is not the player instance itself but a
+ *  copy only. This ultimately means the player can't directly do things like `me.pos.x=40`.
+ */ 

@@ -11,6 +11,7 @@ var game = {
   turnOwner: null,
   turnSpeed: null,
   turnSpeedInitial: 500
+  turnSpeedInitial: 500,
   onUnpause: []
 };
 
