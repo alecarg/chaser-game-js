@@ -6,11 +6,12 @@ var helpers = {};
 
 var game = {
   isPaused: false,
-  turn: 0,
+  turn: null,
   turnInterval: null,
   turnOwner: null,
   turnSpeed: null,
   turnSpeedInitial: 500
+  onUnpause: []
 };
 
 var board = {

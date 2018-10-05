@@ -10,8 +10,10 @@ game.restart = function(){
   game.turn = 0;
   game.turnSpeed = game.turnSpeedInitial;
   game.turnOwner = null;
-  game.instantiatePlayers();
   game.instantiateChaser();
+  game.instantiatePlayers();
+  game.onUnpause = [];
+  game.isPaused = false;
   ui.cameraFollowChaser();
   logger.clearLog();
 }
@@ -20,12 +22,20 @@ game.pause = function(){
 	var btn = document.querySelector('button.pause');
 	if (game.isPaused){
 		game.isPaused = false;
-		game.passTurn();
 		btn.innerHTML = 'Pause';
+    game.runOnUnpause();
+    game.passTurn();
 	} else {
 		game.isPaused = true;
-		clearInterval(game.turnInterval);
 		btn.innerHTML = 'Unpause';
+    clearInterval(game.turnInterval);
+	}
+}
+
+game.runOnUnpause = function(){
+  for (var i = 0; i < game.onUnpause.length; i++) {
+    game.onUnpause[i].call(game.turnOwner);
+    game.onUnpause.splice(i, 1); // remove fn
 	}
 }
 

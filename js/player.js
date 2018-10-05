@@ -5,11 +5,12 @@ class Player {
     this.pos = {};
     this.pos.x = posx;
     this.pos.y = posy;
-    this.distanceToChaser = {};
     this.movesThisTurn = 1;
+    this.distanceToChaser = {};
+    this.setDistanceToChaser();
   }
 
-  setCurrDistanceToChaser(){
+  setDistanceToChaser(){
     this.distanceToChaser.x = Math.abs(chaser.pos.x - this.pos.x);
     this.distanceToChaser.y = Math.abs(chaser.pos.y - this.pos.y);
     this.distanceToChaser.total = this.distanceToChaser.x + this.distanceToChaser.y;
@@ -34,17 +35,21 @@ class Player {
     }
 
     var isMovementValid = (self.hasMovesThisTurn() && board.isTileSuitableForMovement(targetPos.x, targetPos.y));
-    if (isMovementValid){
+    if (!isMovementValid){
+      return logger.log('Player ' + self.number + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
+    }
+
+    if (game.isPaused){
+      return logger.log('Player ' + self.number + ' has not moved this turn as the game is paused.')
+    }
+
     	self.pos = targetPos;
       self.movesThisTurn--;
-      self.setCurrDistanceToChaser();
-    } else {
-      logger.log('Player ' + self.number + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
-    }
   }
 
   onNewTurn(){
     logger.curateLog();
+    this.setDistanceToChaser();
     this.runCodeFromInput();
   }
 
@@ -64,6 +69,13 @@ class Player {
     const log = function(toLog){
       window.logger.log('Log: ' + toLog, 'player-log')
     };
+    const pause = function(){
+      window.game.pause();
+      window.game.onUnpause.push(function(){
+        this.runCodeFromInput();
+        board.draw(); // @todo: feels wrong, but otherwise the player moves and doesn't get shown until the next turn
+      })
+    }
 
     // Unexpose
     const Chaser = {};
@@ -78,9 +90,11 @@ class Player {
       pos: _.clone(window.chaser.pos)
     };
 
+    var playerCode = window.ui.getPlayerInputCode();
+
     // Blacklisted words in code
     var blacklistedWords = ['eval', 'window', 'document', 'console', 'alert', 'debugger'];
-    var isPlayerInputCodeSafe = _.every(blacklistedWords, function(word){ return (window.ui.getPlayerInputCode().indexOf(word) == -1) });
+    var isPlayerInputCodeSafe = _.every(blacklistedWords, function(word){ return (playerCode.indexOf(word) == -1) });
     if (!isPlayerInputCodeSafe){
       return window.logger.log('Your code will not execute if you try to use eval, window, document, console, alert or debugger.', 'error');
     }
@@ -88,9 +102,10 @@ class Player {
     // Run player's code
     try {
       (function(){
-        eval(window.ui.getPlayerInputCode());
+        eval(playerCode);
       })(); // self executing function removes the 'this' reference to the player instance
     } catch (e){
+      console.log('Player code error. '); console.log(e);
       window.logger.log('Your player code has thrown an error: ' + e, 'error');
     }
   }
