@@ -1,6 +1,13 @@
 menu.init = function(){
   menu.slide = 1;
   menu.bindEventHandlers();
+  menu.playMusic();
+}
+
+menu.playMusic = function(){
+  var audio = document.querySelector('audio')
+  audio.volume = 0.1;
+  audio.play();
 }
 
 menu.bindEventHandlers = function(){
