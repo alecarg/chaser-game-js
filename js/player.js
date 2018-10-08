@@ -21,21 +21,24 @@ class Player {
     var self = helpers.getPlayerByPlayerUid(this.uid); // *1
 
     var targetPos;
-    if (direction == 'left'){
+    if (direction == 'west'){
       targetPos = { x: self.pos.x - 1, y: self.pos.y };
     } else
-    if (direction == 'right'){
+    if (direction == 'east'){
       targetPos = { x: self.pos.x + 1, y: self.pos.y };
     } else
-    if (direction == 'up'){
+    if (direction == 'north'){
       targetPos = { x: self.pos.x, y: self.pos.y - 1 };
     } else
-    if (direction == 'down'){
+    if (direction == 'south'){
       targetPos = { x: self.pos.x, y: self.pos.y + 1 };
     }
 
-    var isMovementValid = (self.hasMovesThisTurn() && board.isTileSuitableForMovement(targetPos.x, targetPos.y));
-    if (!isMovementValid){
+    if (!self.hasMovesThisTurn()){
+      return logger.log('Player ' + self.number + ' prevented from moving as it tried to move more than once in the same turn.');
+    }
+
+    if (!board.isTileSuitableForMovement(targetPos.x, targetPos.y)){
       return logger.log('Player ' + self.number + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
     }
 
@@ -64,10 +67,13 @@ class Player {
       uid: _.clone(this.uid), // not for the player to query, but for us to identify and elevate access in move()
       pos: _.clone(this.pos),
       move: this.move,
-      whereIsChaser: this.whereIsChaser
+      whereIsChaser: this.whereIsChaser,
+      whatIsInDirection: this.whatIsInDirection
     };
-    const log = function(toLog){
-      window.logger.log('Log: ' + toLog, 'player-log')
+    const log = function(...toLog){
+      for (var i = 0; i < toLog.length; i++) {
+        window.logger.log('Log: ' + toLog[i], 'player-log')
+      }
     };
     const pause = function(){
       window.game.pause();
@@ -114,7 +120,7 @@ class Player {
 
     var self = helpers.getPlayerByPlayerUid(this.uid); // *1
 
-  	if (self.distanceToChaser.x > self.distanceToChaser.y){
+    if (self.distanceToChaser.x > self.distanceToChaser.y){
       if ((self.pos.x - chaser.pos.x) > 0){
         return 'west';
       } else {
@@ -143,10 +149,46 @@ class Player {
       }
     }
   }
+
+  whatIsInDirection(direction){
+
+    if (!direction){
+      throw 'You need to specify a direction ie. \'north\'';
+    }
+
+    let targetPos;
+    if (direction == 'north'){
+      targetPos = { x: this.pos.x, y: this.pos.y - 1 }
+    } else
+    if (direction == 'south'){
+      targetPos = { x: this.pos.x, y: this.pos.y + 1 }
+    } else
+    if (direction == 'west'){
+      targetPos = { x: this.pos.x - 1, y: this.pos.y }
+    } else
+    if (direction == 'east'){
+      targetPos = { x: this.pos.x + 1, y: this.pos.y }
+    } else {
+      throw 'The direction specified is not valid, try something like \'north\'';
+    }
+
+    if (!window.board.isTileEmptyOfCharacters(targetPos.x, targetPos.y)){
+      return 'character';
+    } else
+    if (!window.board.isTileInMapBoundaries(targetPos.x, targetPos.y)){
+      return 'boundary';
+    }
+
+    if (window.board.getTile(targetPos.x, targetPos.y) == 0){
+      return 'water';
+    } else {
+      return 'land';
+    }
+  }
 }
 
 /*
  *  "Elevates the player's access" to be able to call it's own methods, as the me reference
  *  given to the player and evaluated through eval() is not the player instance itself but a
  *  copy only. This ultimately means the player can't directly do things like `me.pos.x=40`.
- */ 
+ */
