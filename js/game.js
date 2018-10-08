@@ -20,13 +20,16 @@ game.restart = function(){
 
 game.pause = function(){
 	var btn = document.querySelector('button.pause');
+  var backdrop = document.querySelector('.backdrop');
 	if (game.isPaused){
+    backdrop.classList.remove('active');
 		btn.innerHTML = 'Pause';
     game.isPaused = false;
     game.runOnUnpause();
     game.passTurn();
-	} else {
-		btn.innerHTML = 'Unpause';
+  } else {
+    backdrop.classList.add('active');
+    btn.innerHTML = 'Unpause';
     game.isPaused = true;
     game.stopTurnPassing();
 	}

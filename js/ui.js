@@ -40,3 +40,8 @@ ui.cameraFollowChaser = function(){
 ui.updateTurn = function(){
 	document.querySelector('.turn-ui b').innerHTML = game.turn;
 }
+
+ui.codeFullscreen = function(){
+  var cm = window.codeMirror;
+  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+}

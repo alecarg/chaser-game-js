@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Salmon Dev Battle</title>
+  <title>&lt;Dev Battle&gt; by Salmon</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="lib/codemirror/codemirror.css">
@@ -85,24 +85,83 @@
   </div>
 </div>
 
+<div class="backdrop"></div>
 <canvas id="main"></canvas>
 
 <img class="compass" src="assets/compass.gif" />
 
 <div class="left-panel">
-  <button class="restart" onclick="game.restart()">Restart</button>
-  <button class="pause" onclick="game.pause()">Pause</button>
+  <button class="restart btn btn-primary" onclick="game.restart()">Restart</button>
+  <button class="pause btn btn-primary" onclick="game.pause()">Pause</button>
   <span class="turn-ui">Turn: <b>0</b></span>
   <div class="log"></div>
 </div>
 
 <div class="right-panel">
+  <button class="documentation btn btn-primary" onclick="ui.toggleDocumentation()" data-toggle="modal" data-target="#documentationModal">Documentation</button>
+  <button class="fullscreen btn btn-primary" onclick="ui.codeFullscreen()">Fullscreen</button>
   <div class="code"></div>
+</div>
+
+<!-- Documentation modal -->
+<div class="modal fade" id="documentationModal" tabindex="-1" role="dialog" aria-labelledby="documentationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="documentationModalLabel">Documentation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <span class="code-example">log('hello')</span><br />
+          <span class="outputs">// → 'hello'</span><br />
+          <span class="explanation">Log in the in-game console, similar to what you would do with console.log() in the browser console.</span>
+        </p>
+        <p>
+          <span class="code-example">pause()</span><br />
+          <span class="outputs">// → *pauses game*</span><br />
+          <span class="explanation">Pause the game. Useful specially when used inside a function or an if statement to freeze the game in a specific situation, where you will be able to run log() over and over until you remove the pause() statement.</span>
+        </p>
+        <p>
+          <span class="code-example">log(me.pos.x, me.pos.y)</span><br />
+          <span class="outputs">// → 13</span><br />
+          <span class="outputs">// → 11</span><br />
+          <span class="explanation">Find your coordinates in the map.</span>
+        </p>
+        <p>
+          <span class="code-example">log(chaser.pos.x, chaser.pos.y)</span><br />
+          <span class="outputs">// → 3</span><br />
+          <span class="outputs">// → 4</span><br />
+          <span class="explanation">Find the chaser's coordinates in the map.</span>
+        </p>
+        <p>
+          <span class="code-example">me.move('south')</span><br />
+          <span class="outputs">// → *your player moves south*</span><br />
+          <span class="explanation">Move in any of the following directions: 'north', 'south', 'east' or 'west'. The movement will happen when you take your turn. You can only move once per turn, so the first time this method executes in your code will be the one that counts.</span>
+        </p>
+        <p>
+          <span class="code-example">me.whatIsInDirection('east')</span><br />
+          <span class="outputs">// → one of either 'land', 'water', 'boundary' or 'character' (character can either be a player or the chaser)</span><br />
+          <span class="explanation">Find what is around you. This will help you move to tiles safely and avoid drowning in water, or losing turns when trying to move onto an occupied tile our outside the map boundaries.</span>
+        </p>
+         <p>
+          <span class="code-example">me.whereIsChaser()</span><br />
+          <span class="outputs">// → one of either 'north', 'south', 'east', 'west', 'north-east', 'north-west', 'south-east', 'south-west'</span><br />
+          <span class="explanation">Find out where chaser is relative to you. This will give you the direction in which chaser is the closest to you. Tip: if chaser is north, run south!</span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript" src="js/lib/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/lib/lodash-4.17.11.min.js"></script>
-<script type="text/javascript" src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/typewriter-effect.js"></script>
 <script type="text/javascript" src="lib/codemirror/codemirror.js"></script>
 <script type="text/javascript" src="lib/codemirror/codemirror__fullscreen.js"></script>
@@ -124,7 +183,12 @@
 </audio>
 
 <script type="text/javascript">
-  window.addEventListener('load', menu.init, false);
+  if (!true){
+    window.addEventListener('load', menu.init, false);
+  } else {  
+    window.addEventListener('load', game.init, false);
+    document.querySelector('.menu').outerHTML='';
+  }
 </script>
 
 </body>
