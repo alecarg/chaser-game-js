@@ -10,10 +10,20 @@ class Player {
     this.setDistanceToChaser();
   }
 
+  onNewTurn(){
+    logger.curateLog();
+    this.setDistanceToChaser();
+    this.runCodeFromInput();
+  }
+
   setDistanceToChaser(){
     this.distanceToChaser.x = Math.abs(chaser.pos.x - this.pos.x);
     this.distanceToChaser.y = Math.abs(chaser.pos.y - this.pos.y);
     this.distanceToChaser.total = this.distanceToChaser.x + this.distanceToChaser.y;
+  }
+
+  hasMovesThisTurn(){
+    return this.movesThisTurn > 0;
   }
 
   move(direction){
@@ -48,16 +58,6 @@ class Player {
 
     self.pos = targetPos;
     self.movesThisTurn--;
-  }
-
-  onNewTurn(){
-    logger.curateLog();
-    this.setDistanceToChaser();
-    this.runCodeFromInput();
-  }
-
-  hasMovesThisTurn(){
-    return this.movesThisTurn > 0;
   }
 
   runCodeFromInput(){

@@ -2,36 +2,43 @@ html, body {
   height: 100%;
   margin: 0;
 }
+
 body {
   background: url('http://cheapmichaelkorshandbags.com.co/wp-content/uploads/2018/07/Gradient-Background.png');
   overflow: hidden;
 }
+
 canvas {
   position:absolute;
   top: 0;
   left: 0;
 }
+
 canvas.zoomed {
   width: 100%;
 }
+
 .left-panel {
   position: fixed;
   bottom: 10px;
   left: 10px;
   width: 45%;
 }
+
 .right-panel {
   position: fixed;
   bottom: 10px;
   right: 10px;
   width: 45%;
 }
+
 .compass {
   position: fixed;
   right: 10px;
   top: 10px;
   width: 135px;
 }
+
 .log {
   height: 150px;
   width: 100%;
@@ -41,6 +48,7 @@ canvas.zoomed {
   padding: 10px 20px;
   overflow-x: hidden;
 }
+
 .log p {
   margin-bottom: 5px; 
   margin-top: 2px;
@@ -48,30 +56,37 @@ canvas.zoomed {
   font-size: 9px;
   position: relative;
 }
+
 .log p.attention-calling {
   color: green;
 }
+
 .log p.error {
   color: red;
 }
+
 .log p.player-log {
   color: blue;
 }
+
 .restart,
 .pause {
   position: relative;
   left: 0px;
   top: -10px;
 }
+
 .code {
   width: 90%;
   padding: 10px;
   position: relative;
   bottom: -8px;
 }
+
 .code .CodeMirror {
   height: 170px;
 }
+
 .turn-ui {
   margin-left: 10px;
   position: relative;

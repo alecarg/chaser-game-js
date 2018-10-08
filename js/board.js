@@ -50,8 +50,8 @@ board.draw = function() {
     // loop through our map and draw out the image represented by the number.
     for (var i = 0; i < board.tiles.length; i++) {
       for (var j = 0; j < board.tiles[i].length; j++) {
-        var drawX = (i - j) * board.tileH + board.mapX;
-        var drawY = (i + j) * board.tileH / 2 + board.mapY;
+        var drawX = (i - j) * board.tileH + board.offsetX;
+        var drawY = (i + j) * board.tileH / 2 + board.offsetY;
         board.drawTerrain(ctx, i, j, drawX, drawY);
         board.drawCharacters(ctx, i, j, drawX, drawY);
       }

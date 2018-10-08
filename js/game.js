@@ -21,14 +21,14 @@ game.restart = function(){
 game.pause = function(){
 	var btn = document.querySelector('button.pause');
 	if (game.isPaused){
-		game.isPaused = false;
 		btn.innerHTML = 'Pause';
+    game.isPaused = false;
     game.runOnUnpause();
     game.passTurn();
 	} else {
-		game.isPaused = true;
 		btn.innerHTML = 'Unpause';
-    clearInterval(game.turnInterval);
+    game.isPaused = true;
+    game.stopTurnPassing();
 	}
 }
 
@@ -40,13 +40,17 @@ game.runOnUnpause = function(){
 }
 
 game.passTurn = function(){
-  clearInterval(game.turnInterval);
+  game.stopTurnPassing();
   if (game.isPaused){ return; }
   game.turnInterval = setInterval(function(){
   	game.turn++;
   	game.onNewTurn();
     game.passTurn();
   }, game.turnSpeed);
+}
+
+game.stopTurnPassing = function(){
+  clearInterval(game.turnInterval);
 }
 
 game.onNewTurn = function(){
