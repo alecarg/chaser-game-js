@@ -3,30 +3,113 @@
 <head>
   <title>Salmon Dev Battle</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="lib/codemirror/codemirror.css">
   <link rel="stylesheet" type="text/css" href="lib/codemirror/codemirror__fullscreen.css">
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 </head>
 <body>
 
+<div class="menu">
+  <div class="top">
+    <img class="logo" src="assets/salmon-logo.png" />
+  </div>
+  <div class="bottom">
+
+    <div class="content content-1">
+      <h1>&lt;DEV BATTLE&gt;</h1>
+
+      <div class="slide-1">
+        <h2>
+          <span href="" class="typewrite" data-period="2000" data-type='[ "Hello and welcome!", "Can you escape?", "They said you can run fast.", "&hearts; to Develop." ]'>
+            <span class="wrap"></span>
+          </span>
+        </h2>
+        <button type="button" class="next btn btn-primary">start</button>
+      </div>
+
+      <div class="slide-2">
+        <h2>
+          You will impersonate a player in a game. <br />
+          Your objective is to escape from the chaser, an AI. <br />
+          Other players will be trying to escape too... so be smart! <br />
+          Last person standing wins :)
+        </h2>
+        <button type="button" class="prev btn btn-primary">prev</button>
+        <button type="button" class="next btn btn-primary">next</button>
+      </div>
+
+      <div class="slide-3">
+        <h2>
+          You control your character by writing javascript. <br />
+          The game develops turn by turn. <br />
+          Each turn, one player moves by having it's code execute. <br />
+          The chaser also gets its own turn. <br />
+        </h2>
+        <button type="button" class="prev btn btn-primary">prev</button>
+        <button type="button" class="next btn btn-primary">next</button>
+      </div>
+
+      <div class="slide-4">
+        <h2>
+          We will give you methods you can use to understand the context of every turn. <br />
+          For example, you will be able to know where the chaser is in relation to your position. <br />
+          These will be available for you to consult at all times. <br />
+        </h2>
+        <button type="button" class="prev btn btn-primary">prev</button>
+        <button type="button" class="next btn btn-primary">next</button>
+      </div>
+
+      <div class="slide-5">
+        <h2>
+          The rest will be mostly writing javascript. <br />
+          The suggestion is to think about the strategy first, and then try to implement it <br />
+          Functions are your friend!
+        </h2>
+        <button type="button" class="prev btn btn-primary">prev</button>
+        <button type="button" class="next btn btn-primary">next</button>
+      </div>
+
+      <div class="slide-6">
+        <h2>
+          You will have 10 minutes to complete your code. <br />
+          Google is accessible as a tab at the top to check javascript syntax, etc. <br />
+          Ready?
+        </h2>
+        <button type="button" class="prev btn btn-primary">prev</button>
+        <button type="button" class="start btn btn-primary">start</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
 <canvas id="main"></canvas>
+
+<img class="compass" src="assets/compass.gif" />
+
 <div class="left-panel">
   <button class="restart" onclick="game.restart()">Restart</button>
   <button class="pause" onclick="game.pause()">Pause</button>
   <span class="turn-ui">Turn: <b>0</b></span>
   <div class="log"></div>
 </div>
-<img class="compass" src="assets/compass.gif" />
+
 <div class="right-panel">
   <div class="code"></div>
 </div>
 
 <script type="text/javascript" src="js/lib/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/lib/lodash-4.17.11.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="lib/typewriter-effect.js"></script>
 <script type="text/javascript" src="lib/codemirror/codemirror.js"></script>
 <script type="text/javascript" src="lib/codemirror/codemirror__fullscreen.js"></script>
 <script type="text/javascript" src="lib/codemirror/codemirror__javascript.js"></script>
 
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript" src="js/game.js"></script>
 <script type="text/javascript" src="js/board.js"></script>
 <script type="text/javascript" src="js/player.js"></script>
@@ -36,7 +119,7 @@
 <script type="text/javascript" src="js/logger.js"></script>
 
 <script type="text/javascript">
-	window.addEventListener('load', game.init, false);
+	window.addEventListener('load', menu.init, false);
 </script>
 
 </body>

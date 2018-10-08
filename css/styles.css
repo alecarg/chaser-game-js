@@ -92,3 +92,68 @@ canvas.zoomed {
   position: relative;
   top: -10px;
 }
+
+.menu {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.menu .top {
+  height: 30%;
+  background-color: white;
+  position: relative;
+}
+
+.menu .top .logo {
+  position: absolute;
+  top: 50%;
+  margin-top: -47px;
+  left: 50%;
+  margin-left: -132px;
+}
+
+.menu .bottom {
+  height: 70%;
+  background-color: purple;
+  position: relative;
+  font-family: 'VT323', monospace;
+}
+
+.menu .bottom .content {
+  width: 800px;
+  position: absolute;
+  top: 30%;
+  margin-top: -50px;
+  left: 50%;
+  margin-left: -400px;
+  text-align: center;
+}
+
+.menu .bottom h1 {
+  margin: 0;
+  color: white;
+  font-size: 100px;
+}
+
+.menu .bottom h2 {
+  margin: 0;
+  color: white;
+  font-size: 32px;
+  margin: 20px 0 40px;
+}
+
+.menu .bottom .btn {
+  font-size: 32px;
+  background-color: 
+}
+
+.menu .slide-2,
+.menu .slide-3,
+.menu .slide-4,
+.menu .slide-5,
+.menu .slide-6,
+.menu .slide-7 {
+  display: none;
+}

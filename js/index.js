@@ -1,3 +1,4 @@
+var menu = {};
 var players = [];
 var chaser = {};
 var logger = {};
