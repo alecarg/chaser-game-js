@@ -2,9 +2,16 @@ game.init = function(){
   window.removeEventListener('load', game.init);
   board.create();
   ui.initialiseCodeUI();
-  ui.startTimer();
+  ui.showBackdrop();
   game.restart();
   game.passTurn();
+  menu.init();
+}
+
+game.start = function(){
+  ui.hideBackdrop();
+  ui.startTimer();
+  game.restart();
 }
 
 game.restart = function(){
@@ -21,15 +28,14 @@ game.restart = function(){
 
 game.pause = function(){
 	var btn = document.querySelector('button.pause');
-  var backdrop = document.querySelector('.backdrop');
 	if (game.isPaused){
-    backdrop.classList.remove('active');
+    ui.hideBackdrop();
 		btn.innerHTML = 'Pause';
     game.isPaused = false;
     game.runOnUnpause();
     game.passTurn();
   } else {
-    backdrop.classList.add('active');
+    ui.showBackdrop();
     btn.innerHTML = 'Unpause';
     game.isPaused = true;
     game.stopTurnPassing();
@@ -163,8 +169,8 @@ game.timeOver = function(){
   game.saveCode();
   game.pause();
   setTimeout(function(){
-    menu.init();
-  }, 2000);
+    document.location.reload();
+  }, 5000);
 }
 
 game.saveCode = function(){

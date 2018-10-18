@@ -143,6 +143,7 @@ canvas.zoomed {
   left: 10px;
   top: 10px;
   color: black;
+  font-weight: bold;
 }
 
 .compass {
@@ -167,6 +168,7 @@ audio {
   height: 30%;
   background-color: white;
   position: relative;
+  overflow: hidden;
 }
 
 .menu .top .logo {
@@ -182,6 +184,10 @@ audio {
   background-color: purple;
   position: relative;
   font-family: 'VT323', monospace;
+}
+
+.menu .bottom.transparent {
+  background-color: transparent;
 }
 
 .menu .bottom .content {

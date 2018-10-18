@@ -14,7 +14,7 @@ menu.hide = function(){
 }
 
 menu.playMusic = function(){
-  var audio = document.querySelector('audio')
+  var audio = document.querySelector('audio');
   audio.volume = 0.1;
   audio.play();
 }
@@ -26,8 +26,11 @@ menu.bindEventHandlers = function(){
 }
 
 menu.nextSlide = function(){
-  $('.menu .bottom').animate({height: '100%'});
   $('.menu .top').animate({height: 0});
+  $('.menu .bottom').animate({height: '100%'}, function(){
+    $(this).addClass('transparent');
+  });
+
   $('.menu .slide-' + menu.slide).fadeOut(function(){
     menu.slide++;
     $('.menu .slide-' + menu.slide).fadeIn();
@@ -35,8 +38,6 @@ menu.nextSlide = function(){
 }
 
 menu.prevSlide = function(){
-  $('.menu .bottom').animate({height: '100%'});
-  $('.menu .top').animate({height: 0});
   $('.menu .slide-' + menu.slide).fadeOut(function(){
     menu.slide--;
     $('.menu .slide-' + menu.slide).fadeIn();
@@ -45,6 +46,6 @@ menu.prevSlide = function(){
 
 menu.startGame = function(){
   $('.menu').fadeOut(function(){
-    game.init();
+    game.start();
   });
 }

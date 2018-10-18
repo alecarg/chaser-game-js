@@ -46,6 +46,14 @@ ui.codeFullscreen = function(){
   cm.setOption("fullScreen", !cm.getOption("fullScreen"));
 }
 
+ui.showBackdrop = function(){
+  document.querySelector('.backdrop').classList.add('active');
+}
+
+ui.hideBackdrop = function(){
+  document.querySelector('.backdrop').classList.remove('active');
+}
+
 ui.startTimer = function() { // https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
 
   clearInterval(ui.timer);
