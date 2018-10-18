@@ -222,6 +222,8 @@ audio {
 .menu .slide-4,
 .menu .slide-5,
 .menu .slide-6,
-.menu .slide-7 {
+.menu .slide-7,
+.menu .slide-8,
+.menu .slide-9 {
   display: none;
 }
