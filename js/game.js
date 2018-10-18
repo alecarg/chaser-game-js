@@ -15,6 +15,7 @@ game.restart = function(){
   game.onUnpause = [];
   game.isPaused = false;
   ui.cameraFollowChaser();
+  ui.startTimer();
   logger.clearLog();
 }
 
@@ -108,7 +109,7 @@ game.onNewTurnCycle = function(){
 }
 
 game.instantiatePlayers = function(){
-  var playersToSpawn = 7;
+  var playersToSpawn = 1;
   for (var i = 0; i < playersToSpawn; i++) {
     var playerUid = i;
     var playerPosX = Math.floor((Math.random() * Math.floor(10) + 5));
@@ -158,10 +159,14 @@ game.accelerateTurnSpeed = function(){
 	game.turnSpeed = game.turnSpeed * 0.98;
 }
 
+game.timeOver = function(){
+  game.saveCode();
+  game.pause();
+  setTimeout(function(){
+    menu.init();
+  }, 2000);
+}
+
 game.saveCode = function(){
-  // http://stuk.github.io/jszip/ ?
-  // http://jsfiddle.net/VBJ9h/319/ ? (encode to base64 and force a click?)
-  // http://danml.com/download.html ?
-  // + localStorage
-  // + cookie?
+  download(ui.getPlayerInputCode(), 'player-code-' + Date.now() + '.js', 'text/plain');
 }

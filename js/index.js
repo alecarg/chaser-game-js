@@ -10,8 +10,9 @@ var game = {
   turnInterval: null,
   turnOwner: null,
   turnSpeed: null,
-  turnSpeedInitial: 100,
-  onUnpause: []
+  turnSpeedInitial: 500,
+  onUnpause: [],
+  timePerPlayer: 60 * 10 // seconds
 };
 
 var board = { // tile pixel size (26x50) + Gap between tiles (2x4)

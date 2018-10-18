@@ -45,3 +45,43 @@ ui.codeFullscreen = function(){
   var cm = window.codeMirror;
   cm.setOption("fullScreen", !cm.getOption("fullScreen"));
 }
+
+ui.startTimer = function() { // https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
+
+  clearInterval(ui.timer);
+
+  var duration = game.timePerPlayer,
+      display = document.querySelector('.timer'),
+      start = Date.now(),
+      diff,
+      minutes,
+      seconds;
+
+  function timer() {
+      // get the number of seconds that have elapsed since 
+      // startTimer() was called
+      diff = duration - (((Date.now() - start) / 1000) | 0);
+
+      // does the same job as parseInt truncates the float
+      minutes = (diff / 60) | 0;
+      seconds = (diff % 60) | 0;
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds; 
+
+      if (diff <= 0) {
+          // restart (and add one second so that the count down starts at 
+          // the full duration example 05:00 not 04:59)
+          // start = Date.now() + 1000;
+
+          clearInterval(ui.timer);
+          game.timeOver();
+      }
+  };
+
+  timer(); // we don't want to wait a full second before the timer starts
+
+  ui.timer = setInterval(timer, 1000);
+}

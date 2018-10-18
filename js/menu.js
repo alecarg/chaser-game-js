@@ -2,6 +2,15 @@ menu.init = function(){
   menu.slide = 1;
   menu.bindEventHandlers();
   menu.playMusic();
+  menu.show();
+}
+
+menu.show = function(){
+  $('.menu').show();
+}
+
+menu.hide = function(){
+  $('.menu').hide();
 }
 
 menu.playMusic = function(){
