@@ -2,6 +2,7 @@ game.init = function(){
   window.removeEventListener('load', game.init);
   board.create();
   ui.initialiseCodeUI();
+  ui.startTimer();
   game.restart();
   game.passTurn();
 }
@@ -15,7 +16,6 @@ game.restart = function(){
   game.onUnpause = [];
   game.isPaused = false;
   ui.cameraFollowChaser();
-  ui.startTimer();
   logger.clearLog();
 }
 
