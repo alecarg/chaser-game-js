@@ -86,6 +86,7 @@ canvas.zoomed {
   left: 0px;
   top: -10px;
   opacity: 0.8;
+  margin-bottom: 0;
 }
 
 .turn-ui {
@@ -116,6 +117,7 @@ canvas.zoomed {
   opacity: 0.8;
 }
 
+.simulate-multiple,
 .fullscreen,
 .documentation {
   position: relative;
@@ -123,6 +125,7 @@ canvas.zoomed {
   top: -10px;
   opacity: 0.8;
   z-index: 10;
+  margin-bottom: 0;
 }
 
 .backdrop {

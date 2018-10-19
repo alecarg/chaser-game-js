@@ -1,3 +1,41 @@
+ui.init = function(){
+  ui.bindEventHandlers();
+  ui.initialiseCodeUI();
+  ui.initialiseTurnSpeedSlider();
+  ui.initialiseTooltips();
+}
+
+ui.bindEventHandlers = function(){
+  $('.pause').off('click').on('click', ui.handlePauseClicked);
+  $('.restart').off('click').on('click', ui.handleRestartClicked);
+  $('.simulate-multiple').off('click').on('click', ui.handleSimulateMultipleClicked);
+}
+
+ui.handlePauseClicked = function(e){
+  e.preventDefault();
+  game.pause();
+}
+
+ui.handleRestartClicked = function(e){
+  e.preventDefault();
+  game.restart();
+}
+
+ui.handleSimulateMultipleClicked = function(e){
+  e.preventDefault();
+
+  var checkbox = $(e.target).find('input')[0];
+  if (checkbox.checked){
+    checkbox.checked = false;
+    game.playersToSpawn = 1;
+  } else {
+    checkbox.checked = true;
+    game.playersToSpawn = 7;
+  }
+
+  game.restart();
+}
+
 ui.initialiseCodeUI = function(){
   var textarea = document.querySelector('.code');
   window.codeMirror = CodeMirror(textarea, {
@@ -33,6 +71,10 @@ ui.initialiseTurnSpeedSlider = function(){
 ui.handleTurnSpeedSlided = function(e){
   game.turnSpeed = e.value;
   console.log(game.turnSpeed);
+}
+
+ui.initialiseTooltips = function(){
+  $('[data-toggle="tooltip"]').tooltip();
 }
 
 ui.cameraFollowChaser = function(){

@@ -73,8 +73,8 @@ board.drawCharacters = function(ctx, i, j, drawX, drawY) {
     ctx.drawImage(board.tileGraphics[tileToDraw], drawX, drawY - characterElevation);
 
     // Draw chaser's name
-    ctx.font = '18px Verdana';
-    ctx.fillText('Chaser', drawX + 18 - ('Chaser'.length * 4), drawY - 30);
+    ctx.font = '11px Arial Black';
+    ctx.fillText('Chaser', drawX + 20 - ('Chaser'.length * 2.5), drawY - 30);
     return;
   }
 
@@ -86,8 +86,8 @@ board.drawCharacters = function(ctx, i, j, drawX, drawY) {
     var playerUid = playerInCurrTile.number.toString();
     var playerText = 'Player ' + playerUid;
     var playerTextLength = playerText.length;
-    ctx.font = '18px Verdana';
-    ctx.fillText(playerText, drawX + 18 - (playerTextLength * 4), drawY - 30);
+    ctx.font = '11px Arial Black';
+    ctx.fillText(playerText, drawX + 20 - (playerTextLength * 2.5), drawY - 30);
     return;
   }
 }

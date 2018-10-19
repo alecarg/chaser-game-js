@@ -1,8 +1,7 @@
 game.init = function(){
   window.removeEventListener('load', game.init);
   board.create();
-  ui.initialiseCodeUI();
-  ui.initialiseTurnSpeedSlider();
+  ui.init();
   ui.showBackdrop();
   game.turnSpeed = game.turnSpeedInitial;
   game.restart();
@@ -17,6 +16,7 @@ game.start = function(){
 }
 
 game.restart = function(){
+  players = [];
   game.turn = 0;
   game.turnOwner = null;
   game.instantiateChaser();
@@ -28,16 +28,16 @@ game.restart = function(){
 }
 
 game.pause = function(){
-	var btn = document.querySelector('button.pause');
+	var pauseCheckbox = $('.pause input')[0];
 	if (game.isPaused){
     ui.hideBackdrop();
-		btn.innerHTML = 'Pause';
+		pauseCheckbox.checked = false;
     game.isPaused = false;
     game.runOnUnpause();
     game.passTurn();
   } else {
     ui.showBackdrop();
-    btn.innerHTML = 'Unpause';
+    pauseCheckbox.checked = true;
     game.isPaused = true;
     game.stopTurnPassing();
 	}
@@ -116,8 +116,7 @@ game.onNewTurnCycle = function(){
 }
 
 game.instantiatePlayers = function(){
-  var playersToSpawn = 1;
-  for (var i = 0; i < playersToSpawn; i++) {
+  for (var i = 0; i < game.playersToSpawn; i++) {
     var playerUid = i;
     var playerPosX = Math.floor((Math.random() * Math.floor(10) + 5));
     var playerPosY = 2 + i;

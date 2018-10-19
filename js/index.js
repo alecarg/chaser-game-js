@@ -12,7 +12,8 @@ var game = {
   turnSpeed: null,
   turnSpeedInitial: 750,
   onUnpause: [],
-  timePerPlayer: 60 * 10 // seconds
+  timePerPlayer: 60 * 10, // seconds
+  playersToSpawn: 1
 };
 
 var board = { // tile pixel size (26x50) + Gap between tiles (2x4)

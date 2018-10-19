@@ -146,8 +146,11 @@
 <img class="compass" src="assets/compass.png" />
 
 <div class="left-panel">
-  <button class="restart btn btn-primary" onclick="game.restart()">Restart</button>
-  <button class="pause btn btn-primary" onclick="game.pause()">Pause</button>
+  <button class="restart btn btn-primary">Restart</button>
+  <label class="pause btn btn-primary">
+    <input type="checkbox" />
+    Pause
+  </label>
   <span class="turn-ui">Turn: <b>0</b></span>
   <input data-slider-id="slider-turn-speed" type="text" data-slider-value="750"/>
   <div class="log">
@@ -156,6 +159,10 @@
 </div>
 
 <div class="right-panel">
+  <label class="simulate-multiple btn btn-primary" data-toggle="tooltip" data-placement="top" title="Your clones will all use the same player code you write!">
+    <input type="checkbox" />
+    Simulate multiple players
+  </label>
   <button class="documentation btn btn-primary" data-toggle="modal" data-target="#documentationModal">Documentation</button>
   <button class="fullscreen btn btn-primary" onclick="ui.codeFullscreen()">Fullscreen</button>
   <div class="code"></div>
@@ -229,6 +236,7 @@
 
 <script type="text/javascript" src="js/lib/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/lib/lodash-4.17.11.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap-tooltips__popper.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap-slider/bootstrap-slider.min.js"></script>
 <script type="text/javascript" src="lib/typewriter-effect.js"></script>
@@ -253,8 +261,7 @@
 </audio>
 
 <script type="text/javascript">
-  // window.addEventListener('load', game.init, false);
-  window.addEventListener('load', function(){game.init();menu.hide();game.start();}, false);
+  window.addEventListener('load', game.init, false);
 </script>
 
 </body>
