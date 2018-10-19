@@ -51,7 +51,8 @@ class Chaser {
       this.extraTurns--;
       return true;
     } else {
-      if (game.turn >= 50){
+      var difficultyIncreaseTurn = players.length * 50;
+      if (game.turn >= difficultyIncreaseTurn){
         this.extraTurns = 1;
       }
       return false;
