@@ -112,7 +112,8 @@ class Player {
       })(); // self executing function removes the 'this' reference to the player instance
     } catch (e){
       console.log('Player code error. '); console.log(e);
-      window.logger.log('Your player code has thrown an error: ' + e, 'error');
+      var errorLine = e.stack.match(/anonymous.*?\)/g)[1].replace('anonymous>', '').replace(')', '');
+      window.logger.log('Your player code has thrown an error: ' + e + '. It is located in the following line and column: ' + errorLine + '.', 'error');
     }
   }
 
