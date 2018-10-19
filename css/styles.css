@@ -217,13 +217,10 @@ audio {
   font-size: 32px;
 }
 
-.menu .slide-2,
-.menu .slide-3,
-.menu .slide-4,
-.menu .slide-5,
-.menu .slide-6,
-.menu .slide-7,
-.menu .slide-8,
-.menu .slide-9 {
+.menu .slide {
   display: none;
+}
+
+.menu .slide-1 {
+  display: block;
 }
