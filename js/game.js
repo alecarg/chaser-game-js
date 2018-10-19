@@ -1,8 +1,7 @@
 game.init = function(){
-  window.removeEventListener('load', game.init);
-  board.create();
   ui.init();
   ui.showBackdrop();
+  board.create();
   game.turnSpeed = game.turnSpeedInitial;
   game.restart();
   game.passTurn();

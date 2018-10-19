@@ -1,4 +1,6 @@
 ui.init = function(){
+  $('body').fadeIn();
+  window.removeEventListener('load', game.init);
   ui.bindEventHandlers();
   ui.initialiseCodeUI();
   ui.initialiseTurnSpeedSlider();
