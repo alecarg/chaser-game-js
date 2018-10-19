@@ -22,6 +22,7 @@ game.restart = function(){
   game.instantiatePlayers();
   game.onUnpause = [];
   game.isPaused = false;
+  game.difficultyIncreaseTurn = players.length * 60; // after 60 turns each player
   ui.cameraFollowChaser();
   logger.logNewGameStarted();
 }
@@ -112,6 +113,7 @@ game.onNewTurnCycle = function(){
   helpers.forAllPlayers(function(i, p){
     p.movesThisTurn = 1;
   });
+  chaser.setTurnsThisCycle();
 }
 
 game.instantiatePlayers = function(){
@@ -148,9 +150,10 @@ game.killPlayer = function(player, reason){
 }
 
 game.checkTurnBasedConditions = function(){
-  if (game.turn == 50){
+  if (game.turn == game.difficultyIncreaseTurn){
   	logger.log('Game difficulty now MEDIUM. Chaser has 2 turns per cycle now.', 'attention-calling');
   }
+
 }
 
 game.checkIfGameOver = function(){

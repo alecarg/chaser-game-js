@@ -3,7 +3,7 @@ class Chaser {
     this.pos = {};
     this.pos.x = posx;
     this.pos.y = posy;
-    this.extraTurns = 0;
+    this.turnsThisCycle = 1;
   }
 
   onNewTurn(){
@@ -46,15 +46,19 @@ class Chaser {
     }
   }
 
+  setTurnsThisCycle(){
+    if (game.turn >= game.difficultyIncreaseTurn){
+      this.turnsThisCycle = 2;
+    } else {
+      this.turnsThisCycle = 1;
+    }
+  }
+
   isExtraTurnsRemainig(){
-    if (this.extraTurns > 0){
-      this.extraTurns--;
+    if (this.turnsThisCycle > 1){
+      this.turnsThisCycle--;
       return true;
     } else {
-      var difficultyIncreaseTurn = players.length * 50;
-      if (game.turn >= difficultyIncreaseTurn){
-        this.extraTurns = 1;
-      }
       return false;
     }
   }
