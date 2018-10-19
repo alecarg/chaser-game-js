@@ -143,6 +143,10 @@ canvas.zoomed {
   max-width: 90% !important;
 }
 
+.modal-dialog img + img {
+  margin-left: 20px;
+}
+
 .code-example {
   font-weight: bold;
   color: #4c1a4c;

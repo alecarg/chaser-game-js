@@ -172,6 +172,31 @@
         </button>
       </div>
       <div class="modal-body">
+        <h4>The fundamentals</h4>
+        <p>
+          <span class="code-example">me.move('south')</span><br />
+          <span class="outputs">// → *your player moves south*</span><br />
+          <span class="explanation">Move in any of the following directions: 'north', 'south', 'east' or 'west'. The movement will happen when you take your turn. You can only move once per turn, so the first time this method executes in your code will be the one that counts.</span>
+        </p>
+        <p>
+          <span class="code-example">me.whatIsInDirection('east')</span><br />
+          <span class="outputs">// → one of either 'land', 'water', 'boundary' or 'character' (character can either be a player or the chaser)</span><br />
+          <span class="explanation">Find what is around you. This will help you move to tiles safely and avoid drowning in water, or losing turns when trying to move onto an occupied tile our outside the map boundaries.</span>
+        </p>
+         <p>
+          <span class="code-example">me.whereIsChaser()</span><br />
+          <span class="outputs">// → one of either 'north', 'south', 'east', 'west', 'north-east', 'north-west', 'south-east', 'south-west'</span><br />
+          <span class="explanation">Find out where chaser is relative to you. This will give you the direction in which chaser is the closest to you. Tip: if chaser is north, run south!</span>
+        </p>
+        <h4>The map</h4>
+        <img src="assets/map.png" />
+        <img src="assets/compass.png" />
+        <p> The map is 40x40.<br />
+            At the top corner, you have x: 0 and y: 0, whilst at the bottom, you have x: 40 and y: 40.<br />
+            And at the right corner, you have x: 40 and y: 0, whilst at the left corner, you have x: 0 and y: 40.<br />
+            This means you transverse from north to south through y, and from east to west through x.
+        </p>
+        <h4>Others</h4>
         <p>
           <span class="code-example">log('hello')</span><br />
           <span class="outputs">// → 'hello'</span><br />
@@ -193,21 +218,6 @@
           <span class="outputs">// → 3</span><br />
           <span class="outputs">// → 4</span><br />
           <span class="explanation">Find the chaser's coordinates in the map.</span>
-        </p>
-        <p>
-          <span class="code-example">me.move('south')</span><br />
-          <span class="outputs">// → *your player moves south*</span><br />
-          <span class="explanation">Move in any of the following directions: 'north', 'south', 'east' or 'west'. The movement will happen when you take your turn. You can only move once per turn, so the first time this method executes in your code will be the one that counts.</span>
-        </p>
-        <p>
-          <span class="code-example">me.whatIsInDirection('east')</span><br />
-          <span class="outputs">// → one of either 'land', 'water', 'boundary' or 'character' (character can either be a player or the chaser)</span><br />
-          <span class="explanation">Find what is around you. This will help you move to tiles safely and avoid drowning in water, or losing turns when trying to move onto an occupied tile our outside the map boundaries.</span>
-        </p>
-         <p>
-          <span class="code-example">me.whereIsChaser()</span><br />
-          <span class="outputs">// → one of either 'north', 'south', 'east', 'west', 'north-east', 'north-west', 'south-east', 'south-west'</span><br />
-          <span class="explanation">Find out where chaser is relative to you. This will give you the direction in which chaser is the closest to you. Tip: if chaser is north, run south!</span>
         </p>
       </div>
       <div class="modal-footer">
@@ -243,7 +253,8 @@
 </audio>
 
 <script type="text/javascript">
-  window.addEventListener('load', game.init, false);
+  // window.addEventListener('load', game.init, false);
+  window.addEventListener('load', function(){game.init();menu.hide();game.start();}, false);
 </script>
 
 </body>
