@@ -42,8 +42,15 @@ canvas.zoomed {
   text-align: right; 
 }
 
+.code .CodeMirror {
+  height: 220px;
+  border-radius: 5px;
+  opacity: 0.8;
+  text-align: left;
+}
+
 .log {
-  height: 172px;
+  height: 222px;
   width: 100%;
   border: 1px dashed #e1c9ec;
   background: white;
@@ -107,13 +114,6 @@ canvas.zoomed {
   background-color: #4c1a4c;
   background-image: linear-gradient(to bottom,#4c1a4c 0,#612061 100%);
   opacity: 0.8;
-}
-
-.code .CodeMirror {
-  height: 170px;
-  border-radius: 5px;
-  opacity: 0.8;
-  text-align: left;
 }
 
 .fullscreen,
