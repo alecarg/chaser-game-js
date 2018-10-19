@@ -65,7 +65,7 @@ ui.initialiseTurnSpeedSlider = function(){
   $('[data-slider-id="slider-turn-speed"]').slider({
     ticks: [50, 1000],
     formatter: function(value) {
-      return 'Turn speed: ' + value;
+      return 'Turn time: ' + value;
     }
   }).on('slide', ui.handleTurnSpeedSlided);
 }
