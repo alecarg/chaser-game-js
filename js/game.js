@@ -157,7 +157,7 @@ game.checkTurnBasedConditions = function(){
 
 game.checkIfGameOver = function(){
   if (players.length < 1){
-    console.log('Game over. Your escapers survived: ' + game.turn + ' turns.');
+    console.log('Game over. Your player/s survived: ' + game.turn + ' turns.');
     game.restart();
   }
 }

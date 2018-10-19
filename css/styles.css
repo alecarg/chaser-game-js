@@ -160,6 +160,7 @@ canvas.zoomed {
   top: 10px;
   color: black;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .compass {
