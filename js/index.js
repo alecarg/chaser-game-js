@@ -10,7 +10,7 @@ var game = {
   turnInterval: null,
   turnOwner: null,
   turnSpeed: null,
-  turnSpeedInitial: 500,
+  turnSpeedInitial: 750,
   onUnpause: [],
   timePerPlayer: 60 * 10 // seconds
 };

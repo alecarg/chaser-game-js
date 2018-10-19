@@ -9,6 +9,10 @@ logger.clearLog = function(){
   log.innerHTML = '';
 }
 
+logger.logNewGameStarted = function(){
+  logger.log('A new game has started.', 'attention-calling')
+}
+
 logger.curateLog = function(){
 
   // Clear errors

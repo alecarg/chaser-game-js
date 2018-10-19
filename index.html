@@ -4,6 +4,7 @@
   <title>&lt;Dev Battle&gt; by Salmon</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-slider/bootstrap-slider.min.css">
   <link rel="stylesheet" type="text/css" href="lib/codemirror/codemirror.css">
   <link rel="stylesheet" type="text/css" href="lib/codemirror/codemirror__fullscreen.css">
   <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
@@ -148,7 +149,10 @@
   <button class="restart btn btn-primary" onclick="game.restart()">Restart</button>
   <button class="pause btn btn-primary" onclick="game.pause()">Pause</button>
   <span class="turn-ui">Turn: <b>0</b></span>
-  <div class="log"></div>
+  <input data-slider-id="slider-turn-speed" type="text" data-slider-value="750"/>
+  <div class="log">
+    <p>This is your console. You will only receive game messages here that will inform you about what's happening.</p>
+  </div>
 </div>
 
 <div class="right-panel">
@@ -216,6 +220,7 @@
 <script type="text/javascript" src="js/lib/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/lib/lodash-4.17.11.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap-slider/bootstrap-slider.min.js"></script>
 <script type="text/javascript" src="lib/typewriter-effect.js"></script>
 <script type="text/javascript" src="lib/download.js"></script>
 <script type="text/javascript" src="lib/codemirror/codemirror.js"></script>

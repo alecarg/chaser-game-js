@@ -21,24 +21,38 @@ ui.getPlayerInputCode = function(){
   return codeMirror.getValue();
 }
 
+ui.initialiseTurnSpeedSlider = function(){
+  $('[data-slider-id="slider-turn-speed"]').slider({
+    ticks: [50, 1000],
+    formatter: function(value) {
+      return 'Turn speed: ' + value;
+    }
+  }).on('slide', ui.handleTurnSpeedSlided);
+}
+
+ui.handleTurnSpeedSlided = function(e){
+  game.turnSpeed = e.value;
+  console.log(game.turnSpeed);
+}
+
 ui.cameraFollowChaser = function(){
-	var tilesInOneRow = board.tiles[0].length;
+  var tilesInOneRow = board.tiles[0].length;
 
   var docHeight = $(document).height();
-	var stepWindowToTilesH = (docHeight / tilesInOneRow);
-	var cameraPositionH = ((stepWindowToTilesH * 0.66) * ((chaser.pos.y + chaser.pos.x) / 2));
+  var stepWindowToTilesH = (docHeight / tilesInOneRow);
+  var cameraPositionH = ((stepWindowToTilesH * 0.66) * ((chaser.pos.y + chaser.pos.x) / 2));
 
   var docWidth = $(document).width();
   var windowViewport = $(window).width();
   var stepWindowToTilesW = (docWidth / tilesInOneRow);
   var cameraPositionW = ((docWidth / 2) - (windowViewport / 2)) - (stepWindowToTilesW * ((chaser.pos.y - chaser.pos.x) / 2));
-	
-	var animationSpeed = (game.turnSpeed * 0.9);
-	$("html, body").animate({ scrollTop: cameraPositionH, scrollLeft: cameraPositionW }, animationSpeed, 'swing', function(){});
+  
+  var animationSpeed = (game.turnSpeed * 0.9);
+  $("html, body").animate({ scrollTop: cameraPositionH, scrollLeft: cameraPositionW }, animationSpeed, 'swing', function(){});
 }
 
 ui.updateTurn = function(){
-	document.querySelector('.turn-ui b').innerHTML = game.turn;
+  document.querySelector('.turn-ui b').innerHTML = game.turn;
 }
 
 ui.codeFullscreen = function(){

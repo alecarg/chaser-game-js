@@ -91,6 +91,22 @@ canvas.zoomed {
   line-height: 24px;
   border: 1px solid #f3f3f3;
   opacity: 0.8;
+  margin-left: 10px;
+  width: 95px;
+  text-align: center;
+}
+
+#slider-turn-speed {
+  width: 180px;
+  position: relative;
+  top: -10px;
+  margin-left: 20px;
+}
+
+#slider-turn-speed .slider-handle {
+  background-color: #4c1a4c;
+  background-image: linear-gradient(to bottom,#4c1a4c 0,#612061 100%);
+  opacity: 0.8;
 }
 
 .code .CodeMirror {
@@ -193,7 +209,7 @@ audio {
 .menu .bottom .content {
   width: 800px;
   position: absolute;
-  top: 30%;
+  top: 20%;
   margin-top: -50px;
   left: 50%;
   margin-left: -400px;

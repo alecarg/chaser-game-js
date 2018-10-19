@@ -2,7 +2,9 @@ game.init = function(){
   window.removeEventListener('load', game.init);
   board.create();
   ui.initialiseCodeUI();
+  ui.initialiseTurnSpeedSlider();
   ui.showBackdrop();
+  game.turnSpeed = game.turnSpeedInitial;
   game.restart();
   game.passTurn();
   menu.init();
@@ -16,14 +18,13 @@ game.start = function(){
 
 game.restart = function(){
   game.turn = 0;
-  game.turnSpeed = game.turnSpeedInitial;
   game.turnOwner = null;
   game.instantiateChaser();
   game.instantiatePlayers();
   game.onUnpause = [];
   game.isPaused = false;
   ui.cameraFollowChaser();
-  logger.clearLog();
+  logger.logNewGameStarted();
 }
 
 game.pause = function(){
