@@ -248,3 +248,10 @@ audio {
 .menu .slide-1 {
   display: block;
 }
+
+.menu [name="playerName"] {
+  padding: 10px;
+  margin: 20px;
+  text-align: center;
+  width: 65%;
+}

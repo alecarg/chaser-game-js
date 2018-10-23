@@ -11,6 +11,7 @@ game.init = function(){
 game.start = function(){
   ui.hideBackdrop();
   ui.startTimer();
+  game.setPlayerName();
   game.restart();
 }
 
@@ -176,5 +177,17 @@ game.timeOver = function(){
 }
 
 game.saveCode = function(){
-  download(ui.getPlayerInputCode(), 'player-code-' + Date.now() + '.js', 'text/plain');
+  var playerName = game.playerName
+  var inputCode = ui.getPlayerInputCode();
+  var gameReadyCode = `
+      showdown.participants.push({
+        name: '${playerName}',
+        code: \`${inputCode}\`
+      });`
+
+  download(gameReadyCode, 'player-code-' + Date.now() + '.js', 'text/plain');
+}
+
+game.setPlayerName = function(){
+  game.playerName = $('input[name="playerName"]')[0].value;
 }
