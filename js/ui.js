@@ -29,10 +29,10 @@ ui.handleSimulateMultipleClicked = function(e){
   var checkbox = $(e.target).find('input')[0];
   if (checkbox.checked){
     checkbox.checked = false;
-    game.playersToSpawn = 1;
+    game.multiplePlayers = false;
   } else {
     checkbox.checked = true;
-    game.playersToSpawn = 7;
+    game.multiplePlayers = true;
   }
 
   game.restart();
@@ -72,7 +72,6 @@ ui.initialiseTurnSpeedSlider = function(){
 
 ui.handleTurnSpeedSlided = function(e){
   game.turnSpeed = e.value;
-  console.log(game.turnSpeed);
 }
 
 ui.initialiseTooltips = function(){
@@ -135,11 +134,7 @@ ui.startTimer = function() { // https://stackoverflow.com/questions/20618355/the
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
 
-      try {
-        display.textContent = minutes + ":" + seconds; 
-      } catch(e){
-        console.debug('Can\'t update timer. Element might not have been found.')
-      }
+      display.textContent = minutes + ":" + seconds; 
 
       if (diff <= 0) {
           // restart (and add one second so that the count down starts at 

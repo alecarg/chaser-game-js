@@ -6,11 +6,11 @@ menu.init = function(){
 }
 
 menu.show = function(){
-  $('.menu').show();
+  $('.menu').fadeIn();
 }
 
 menu.hide = function(){
-  $('.menu').hide();
+  $('.menu').fadeOut();
 }
 
 menu.playMusic = function(){

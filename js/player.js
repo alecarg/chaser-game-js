@@ -1,19 +1,28 @@
 class Player {
-  constructor(posx, posy, uid){
+  constructor(posx, posy, uid, name, code){
     this.uid = uid;
     this.number = uid + 1;
+    this.name = this.constructPlayerName(name);
     this.pos = {};
     this.pos.x = posx;
     this.pos.y = posy;
+    this.code = code ? code : null;
     this.movesThisTurn = 1;
     this.distanceToChaser = {};
     this.setDistanceToChaser();
   }
 
+  constructPlayerName(name){
+    if (typeof showdown == 'undefined' && game.multiplePlayers){ // only when simulating in single player
+      return name + ' ' + this.number;
+    } else {
+      return name;
+    }
+  }
+
   onNewTurn(){
-    logger.curateLog();
     this.setDistanceToChaser();
-    this.runCodeFromInput();
+    this.runCode();
   }
 
   setDistanceToChaser(){
@@ -42,46 +51,27 @@ class Player {
     } else
     if (direction == 'south'){
       targetPos = { x: self.pos.x, y: self.pos.y + 1 };
+    } else {
+      return logger.log(self.name + ' was prevented from moving as the direction provided was not valid.');
     }
 
     if (!self.hasMovesThisTurn()){
-      return logger.log('Player ' + self.number + ' prevented from moving as it tried to move more than once in the same turn.');
+      return logger.log(self.name + ' was prevented from moving as it tried to move more than once in the same turn.');
     }
 
     if (!board.isTileSuitableForMovement(targetPos.x, targetPos.y)){
-      return logger.log('Player ' + self.number + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
+      return logger.log(self.name + ' has not moved this turn as the target tile was either occupied or outside the map boundaries.');
     }
 
     if (game.isPaused){
-      return logger.log('Player ' + self.number + ' has not moved this turn as the game is paused.')
+      return logger.log(self.name + ' has not moved this turn as the game is paused.')
     }
 
     self.pos = targetPos;
     self.movesThisTurn--;
   }
 
-  runCodeFromInput(){
-
-    // Add helpers
-    const me = {
-      uid: _.clone(this.uid), // not for the player to query, but for us to identify and elevate access in move()
-      pos: _.clone(this.pos),
-      move: this.move,
-      whereIsChaser: this.whereIsChaser,
-      whatIsInDirection: this.whatIsInDirection
-    };
-    const log = function(...toLog){
-      for (var i = 0; i < toLog.length; i++) {
-        window.logger.log('Log: ' + toLog[i], 'player-log')
-      }
-    };
-    const pause = function(){
-      window.game.pause();
-      window.game.onUnpause.push(function(){
-        this.runCodeFromInput();
-        board.draw(); // @todo: feels wrong, but otherwise the player moves and doesn't get shown until the next turn
-      })
-    }
+  runCode(){
 
     // Unexpose
     const Chaser = {};
@@ -92,9 +82,30 @@ class Player {
     const ui = {};
 
     // Half-expose
+    const me = {
+      uid: _.clone(this.uid), // not for the player to query, but for us to identify and elevate access in move()
+      pos: _.clone(this.pos),
+      move: this.move,
+      whereIsChaser: this.whereIsChaser,
+      whatIsInDirection: this.whatIsInDirection
+    };
     const chaser = {
       pos: _.clone(window.chaser.pos)
     };
+
+    // Add helpers
+    const log = function(...toLog){
+      for (var i = 0; i < toLog.length; i++) {
+        window.logger.log('Log: ' + toLog[i], 'player-log')
+      }
+    };
+    const pause = function(){
+      window.game.pause();
+      window.game.onUnpause.push(function(){
+        this.runCode();
+        board.draw(); // @todo: feels wrong, but otherwise the player moves and doesn't get shown until the next turn
+      })
+    }
 
     var playerCode = this.getPlayerCode();
 
@@ -111,14 +122,19 @@ class Player {
         eval(playerCode);
       })(); // self executing function removes the 'this' reference to the player instance
     } catch (e){
-      console.log('Player code error. '); console.log(e);
+      console.log('Player code error. Player name: ' + this.name);
+      console.log(e);
       var errorLine = e.stack.match(/anonymous.*?\)/g)[1].replace('anonymous>', '').replace(')', '');
       window.logger.log('Your player code has thrown an error: ' + e + '. It is located in the following line and column: ' + errorLine + '.', 'error');
     }
   }
 
   getPlayerCode(){
-    return window.ui.getPlayerInputCode();
+    if (this.code != null){
+      return this.code; // for showdown mode
+    } else {
+      return window.ui.getPlayerInputCode();
+    }
   }
 
   whereIsChaser(){

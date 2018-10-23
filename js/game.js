@@ -71,6 +71,7 @@ game.onNewTurn = function(){
   game.checkTurnBasedConditions();
   game.setTurnOwner();
   game.turnOwner.onNewTurn();
+  logger.curateLog();
   board.draw();
 
   chaser.checkHasEaten();  
@@ -118,11 +119,13 @@ game.onNewTurnCycle = function(){
 }
 
 game.instantiatePlayers = function(){
-  for (var i = 0; i < game.playersToSpawn; i++) {
+  var playersToSpawn = game.multiplePlayers ? 7 : 1;
+  for (var i = 0; i < playersToSpawn; i++) {
     var playerUid = i;
     var playerPosX = Math.floor((Math.random() * Math.floor(10) + 5));
     var playerPosY = 2 + i;
-    players[i] = new Player(playerPosX, playerPosY, playerUid);
+    var playerName = game.playerName || 'Player';
+    players[i] = new Player(playerPosX, playerPosY, playerUid, playerName);
   }
 }
 
@@ -141,9 +144,9 @@ game.checkForDrownings = function(){
 }
 
 game.killPlayer = function(player, reason){
-	var message = 'Player ' + player.number + ' has died. ';
+	var message = player.name + ' has died. ';
 	message += reason ? reason : '';
-	message += 'It survived ' + game.turn + ' turns.';
+	message += '(survived ' + game.turn + ' turns)';
     logger.log(message);
 
     var playerPosInArray = helpers.getPlayerIndexInPlayersArr(player);
@@ -154,11 +157,11 @@ game.checkTurnBasedConditions = function(){
   if (game.turn == game.difficultyIncreaseTurn){
   	logger.log('Game difficulty now MEDIUM. Chaser has 2 turns per cycle now.', 'attention-calling');
   }
-
 }
 
 game.checkIfGameOver = function(){
   if (players.length < 1){
+    board.draw();
     console.log('Game over. Your player/s survived: ' + game.turn + ' turns.');
     game.restart();
   }
