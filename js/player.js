@@ -96,7 +96,7 @@ class Player {
       pos: _.clone(window.chaser.pos)
     };
 
-    var playerCode = window.ui.getPlayerInputCode();
+    var playerCode = this.getPlayerCode();
 
     // Blacklisted words in code
     var blacklistedWords = ['eval', 'window', 'document', 'console', 'alert', 'debugger'];
@@ -115,6 +115,10 @@ class Player {
       var errorLine = e.stack.match(/anonymous.*?\)/g)[1].replace('anonymous>', '').replace(')', '');
       window.logger.log('Your player code has thrown an error: ' + e + '. It is located in the following line and column: ' + errorLine + '.', 'error');
     }
+  }
+
+  getPlayerCode(){
+    return window.ui.getPlayerInputCode();
   }
 
   whereIsChaser(){

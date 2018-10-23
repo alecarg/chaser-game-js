@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>&lt;Dev Battle&gt; by Salmon</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/styles-showdown.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-slider/bootstrap-slider.min.css">
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+</head>
+<body style="display: none;">
+
+<div class="menu">
+  <div class="top">
+    <img class="logo" src="assets/salmon-logo.png" />
+  </div>
+  <div class="bottom">
+    <div class="content">
+      <h1>&lt;DEV BATTLE&gt;</h1>
+
+      <div class="slide slide-1">
+        <h2>
+          The final showdown!<br /><br />
+          <span href="" class="typewrite" data-period="2000" data-type='[ "Last person standing wins!", "The chaser is hungry", "Pssst... the prize is worth £100!", "&hearts; to Develop." ]'>
+            <span class="wrap"></span>
+          </span>
+        </h2>
+        <button type="button" class="start btn btn-primary">start</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="backdrop"></div>
+
+<div class="background"></div>
+
+<canvas id="main"></canvas>
+
+<div class="left-panel">
+  <button class="restart btn btn-primary">Restart</button>
+  <label class="pause btn btn-primary">
+    <input type="checkbox" />
+    Pause
+  </label>
+  <span class="turn-ui">Turn: <b>0</b></span>
+  <input data-slider-id="slider-turn-speed" type="text" data-slider-value="750"/>
+  <div class="log">
+    <p>This is your console. You will only receive game messages here that will inform you about what's happening.</p>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="js/lib/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/lib/lodash-4.17.11.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap-tooltips__popper.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap-slider/bootstrap-slider.min.js"></script>
+<script type="text/javascript" src="lib/typewriter-effect.js"></script>
+<script type="text/javascript" src="lib/download.js"></script>
+<script type="text/javascript" src="lib/codemirror/codemirror.js"></script>
+<script type="text/javascript" src="lib/codemirror/codemirror__fullscreen.js"></script>
+<script type="text/javascript" src="lib/codemirror/codemirror__javascript.js"></script>
+
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript" src="js/game.js"></script>
+<script type="text/javascript" src="js/board.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/chaser.js"></script>
+<script type="text/javascript" src="js/helpers.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+<script type="text/javascript" src="js/logger.js"></script>
+<script type="text/javascript" src="js/showdown.js"></script>
+<script type="text/javascript" src="participants-code/player-1.js"></script>
+<script type="text/javascript" src="participants-code/player-2.js"></script>
+
+<audio controls>
+  <source src="assets/audio.mp3" type='audio/mp3'>
+  <p>Your user agent does not support the HTML5 Audio element.</p>
+</audio>
+
+<script type="text/javascript">
+  window.addEventListener('load', game.init, false);
+  // window.addEventListener('load', function(){game.init();menu.hide();game.start();}, false);
+</script>
+
+</body>
+</html>

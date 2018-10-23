@@ -135,7 +135,11 @@ ui.startTimer = function() { // https://stackoverflow.com/questions/20618355/the
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
 
-      display.textContent = minutes + ":" + seconds; 
+      try {
+        display.textContent = minutes + ":" + seconds; 
+      } catch(e){
+        console.debug('Can\'t update timer. Element might not have been found.')
+      }
 
       if (diff <= 0) {
           // restart (and add one second so that the count down starts at 

@@ -1,0 +1,18 @@
+.left-panel {
+  width: calc(100% - 20px);
+}
+
+.log {
+  height: 88px;
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.log p {
+  font-size: 16px;
+  line-height: 1.33;
+}
+
+.backdrop {
+  opacity: 0;
+}
