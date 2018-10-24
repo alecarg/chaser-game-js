@@ -6,7 +6,7 @@ helpers.getPlayerByPlayerUid = function(playerUid){
   return _.find(players, function(p) { return (p.uid === playerUid) });
 }
 
-helpers.getPlayerBoardTile = function(player){
+helpers.getBoardTileTypeByPlayer = function(player){
   return board.getTile(player.pos.x, player.pos.y);
 }
 

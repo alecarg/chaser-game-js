@@ -23,6 +23,8 @@ class Player {
   onNewTurn(){
     this.setDistanceToChaser();
     this.runCode();
+    board.draw();
+    this.checkHasDrowned();
   }
 
   setDistanceToChaser(){
@@ -134,6 +136,14 @@ class Player {
       return this.code; // for showdown mode
     } else {
       return window.ui.getPlayerInputCode();
+    }
+  }
+
+  checkHasDrowned(){
+    var currPlayerTile = helpers.getBoardTileTypeByPlayer(this);
+    var isPlayerInWater = (currPlayerTile == 0);
+    if (isPlayerInWater){
+      game.killPlayer(this, 'It drowned. ');
     }
   }
 

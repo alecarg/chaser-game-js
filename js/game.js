@@ -66,18 +66,12 @@ game.stopTurnPassing = function(){
 }
 
 game.onNewTurn = function(){
-
   ui.updateTurn();
   game.checkTurnBasedConditions();
   game.setTurnOwner();
   game.turnOwner.onNewTurn();
   logger.curateLog();
-  board.draw();
-
-  chaser.checkHasEaten();  
-  game.checkForDrownings();
   game.checkIfGameOver();
-  // game.accelerateTurnSpeed();
 }
 
 game.setTurnOwner = function(){
@@ -133,21 +127,11 @@ game.instantiateChaser = function(){
   chaser = new Chaser(0, 0);
 }
 
-game.checkForDrownings = function(){
-  helpers.forAllPlayers(function(i, player){
-    var currPlayerTile = helpers.getPlayerBoardTile(player);
-    var isPlayerInWater = (currPlayerTile == 0);
-    if (isPlayerInWater){
-      game.killPlayer(player, 'It drowned. ');
-    }
-  });
-}
-
 game.killPlayer = function(player, reason){
 	var message = player.name + ' has died. ';
 	message += reason ? reason : '';
 	message += '(survived ' + game.turn + ' turns)';
-    logger.log(message);
+  logger.log(message);
 
   var playerIndexInArray = helpers.getPlayerIndexInPlayersArr(player);
 
@@ -177,8 +161,9 @@ game.accelerateTurnSpeed = function(){
 }
 
 game.timeOver = function(){
-  game.saveCode();
+  logger.log('Your time is up! Thanks for participating in the chase.', 'attention-calling');
   game.pause();
+  game.saveCode();
   setTimeout(function(){
     document.location.reload();
   }, 5000);

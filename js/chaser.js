@@ -8,6 +8,8 @@ class Chaser {
 
   onNewTurn(){
     this.move();
+    board.draw();
+    this.checkHasEaten();
   }
 
   move(){
