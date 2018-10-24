@@ -149,8 +149,13 @@ game.killPlayer = function(player, reason){
 	message += '(survived ' + game.turn + ' turns)';
     logger.log(message);
 
-    var playerPosInArray = helpers.getPlayerIndexInPlayersArr(player);
-    players.splice(playerPosInArray, 1);
+  var playerIndexInArray = helpers.getPlayerIndexInPlayersArr(player);
+
+  if (player === game.turnOwner){ // killing the turnOwner messes up the next game.setTurnOwner(); we keep a copy of this for it; TODO
+    game.turnOwner.index = playerIndexInArray;
+  }
+
+  players.splice(playerIndexInArray, 1);
 }
 
 game.checkTurnBasedConditions = function(){

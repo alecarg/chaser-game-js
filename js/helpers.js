@@ -11,7 +11,11 @@ helpers.getPlayerBoardTile = function(player){
 }
 
 helpers.getPlayerIndexInPlayersArr = function(player){
-  return _.findIndex(players, function(p) { return (p.uid === player.uid) });
+  var index = _.findIndex(players, function(p) { return (p.uid === player.uid) });
+  if (index == -1){ // the only time the index can't be found is if the turnOwner just died; we keep a copy of its index for this case; TODO
+  	index = game.turnOwner.index;
+  }
+  return 
 }
 
 helpers.forAllPlayers = function(callback){
