@@ -139,6 +139,11 @@ game.killPlayer = function(player, reason){
   }
 
   players.splice(playerIndexInArray, 1);
+
+  return {
+    player: player,
+    playerIndex: playerIndexInArray
+  };
 }
 
 game.checkTurnBasedConditions = function(){

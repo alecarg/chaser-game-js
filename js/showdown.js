@@ -3,12 +3,14 @@ var showdown = {
   winner: null
 };
 
+
 /**
  *  Kill certain functionalities
  */
 game.saveCode = function(){};
 game.setPlayerName = function(){};
 ui.startTimer = function(){};
+
 
 /**
  *  Modify certain functionalities
@@ -44,6 +46,19 @@ game.increaseDifficulty = function(){
   showdown.announce(message, 'temporary');
 }
 
+
+/**
+ *  Extend certain functionalities
+ */
+
+game.killPlayerCopy = game.killPlayer;
+game.killPlayer = function(player, reason){
+  var playerKilled = game.killPlayerCopy(player, reason).player;
+  var playerKilledName = playerKilled.name;
+  $('.participant[data-name="' + playerKilledName + '"]').removeClass('alive');
+}
+
+
 /*
  *  Showdown specific functionality
  */
@@ -64,16 +79,34 @@ showdown.bindEventHandlers = function(){
 
   // Start a fresh, paused game
   $('.start-showdown').on('click', function(e){
-    game.init();
-    logger.clearLog();
-    menu.hide();
-    game.start();
-    game.pause();
+    showdown.start();
   });
 }
 
-showdown.showWinner = function(){
+showdown.start = function(){
+  game.init();
+  logger.clearLog();
+  menu.hide();
+  game.start();
   game.pause();
+  showdown.constructParticipantsTracker();
+}
+
+showdown.constructParticipantsTracker = function(){
+  var participantsEl = $('.participants-tracker');
+  var participantsHTML = '';
+  for (var i = 0; i < players.length; i++) {
+    participantsHTML += `
+      <li class="participant alive" data-name="${players[i].name}">
+        ${players[i].name}
+        <span class="badge-alive badge badge-primary badge-pill">alive</span>
+        <span class="badge-dead badge badge-secondary badge-pill">dead</span>
+      </li>`;
+  }
+  participantsEl.html(participantsHTML);
+}
+
+showdown.showWinner = function(){
   var message = 'Winner: ' + showdown.winner + '!';
   showdown.announce(message);
 }
