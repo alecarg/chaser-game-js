@@ -33,11 +33,15 @@ game.getPlayerName = function(player){
 game.checkIfGameOver = function(){
   if (players.length <= 1){
     board.draw();
-    game.pause();
     logger.log('Game over. Player ' + players[0].name + ' has won! (survived ' + game.turn + ' turns)', 'attention-calling');
     showdown.winner = players[0].name;
     showdown.showWinner();
   }
+}
+
+game.increaseDifficulty = function(){
+  var message = 'Difficulty increase!';
+  showdown.announce(message, 'temporary');
 }
 
 /*
@@ -69,9 +73,28 @@ showdown.bindEventHandlers = function(){
 }
 
 showdown.showWinner = function(){
+  game.pause();
+  var message = 'Winner: ' + showdown.winner + '!';
+  showdown.announce(message);
+}
+
+showdown.announce = function(message, temporary){
+  
+  game.pause();
+
   setTimeout(function(){
-    $('.winner').html('Winner: ' + showdown.winner + '!');
+
     $('.backdrop').animate({opacity: 0.5});
-    $('.winner').animate({top: '50%'});
-  }, 1000)
+    var announceEl = $('.showdown-announcement');
+    announceEl.html(message);
+    announceEl.animate({'top': '50%', 'margin-left': -(announceEl[0].offsetWidth / 2)});
+
+    if (!!temporary){
+      setTimeout(function(){
+        $('.backdrop').animate({opacity: 0});
+        announceEl.animate({'top': '-50%'});
+      }, 8000);
+    }
+
+  }, 500);
 }

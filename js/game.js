@@ -143,8 +143,12 @@ game.killPlayer = function(player, reason){
 
 game.checkTurnBasedConditions = function(){
   if (game.turn == game.turnDifficultyIncrease){
-  	logger.log('Game difficulty now MEDIUM. Chaser has 2 turns per cycle now.', 'attention-calling');
+    game.increaseDifficulty();
   }
+}
+
+game.increaseDifficulty = function(){
+  logger.log('Game difficulty increased. Chaser has 2 turns per cycle now.', 'attention-calling');
 }
 
 game.checkIfGameOver = function(){
