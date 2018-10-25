@@ -180,13 +180,16 @@ game.timeOver = function(){
 game.saveCode = function(){
   var playerName = game.playerName
   var inputCode = ui.getPlayerInputCode().replace(/`/g, "'");
+  var timestamp = Date.now();
   var gameReadyCode = `
       showdown.participants.push({
         name: '${playerName}',
         code: \`${inputCode}\`
       });`
 
-  download(gameReadyCode, 'player-code-' + Date.now() + '.js', 'text/plain');
+  download(gameReadyCode, 'player-code-' + timestamp + '.js', 'text/plain');
+
+  window.localStorage.setItem('player-code-' + timestamp, gameReadyCode);
 }
 
 game.setPlayerName = function(){
