@@ -49,7 +49,7 @@ class Chaser {
   }
 
   setTurnsThisCycle(){
-    if (game.turn >= game.difficultyIncreaseTurn){
+    if (game.turn >= game.turnDifficultyIncrease){
       this.turnsThisCycle = 2;
     } else {
       this.turnsThisCycle = 1;

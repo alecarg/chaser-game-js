@@ -11,11 +11,11 @@ var game = {
   turnOwner: null,
   turnSpeed: null,
   turnSpeedInitial: 750,
-  onUnpause: [],
-  timePerPlayer: 60 * 10, // seconds
+  turnDifficultyIncrease: null,
+  timePerPlayer: 60 * 12, // seconds
   multiplePlayers: false,
-  difficultyIncreaseTurn: null,
-  playerName: null
+  playerName: null,
+  onUnpause: []
 };
 
 var board = { // tile pixel size (26x50) + Gap between tiles (2x4)
