@@ -31,8 +31,11 @@ menu.nextSlide = function(){
     $(this).addClass('transparent');
   });
 
+  $('.menu .slide .btn.btn-primary').hide();
+
   $('.menu .slide-' + menu.slide).fadeOut(function(){
     menu.slide++;
+    $('.menu .slide .btn.btn-primary').show();
     $('.menu .slide-' + menu.slide).fadeIn();
   })
 }

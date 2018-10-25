@@ -15,7 +15,7 @@ helpers.getPlayerIndexInPlayersArr = function(player){
   if (index == -1){ // the only time the index can't be found is if the turnOwner just died; we keep a copy of its index for this case; TODO
   	index = game.turnOwner.index;
   }
-  return 
+  return index;
 }
 
 helpers.forAllPlayers = function(callback){
