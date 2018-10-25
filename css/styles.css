@@ -271,3 +271,7 @@ audio {
   text-align: center;
   width: 65%;
 }
+
+.menu .start {
+  opacity: 0;
+}

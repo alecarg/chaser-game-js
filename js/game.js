@@ -193,5 +193,5 @@ game.saveCode = function(){
 }
 
 game.setPlayerName = function(){
-  game.playerName = $('input[name="playerName"]')[0].value;
+  game.playerName = $('input[name="playerName"]')[0].value.replace(' ', '');
 }

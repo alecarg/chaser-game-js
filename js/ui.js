@@ -11,6 +11,8 @@ ui.bindEventHandlers = function(){
   $('.pause').off('click').on('click', ui.handlePauseClicked);
   $('.restart').off('click').on('click', ui.handleRestartClicked);
   $('.simulate-multiple').off('click').on('click', ui.handleSimulateMultipleClicked);
+  $('.fullscreen').off('click').on('click', ui.codeFullscreen);
+  $('[name="playerName"]').off('click').on('click', function(){ this.value = ' '; $('.menu .start').animate({opacity: 1}); });
 }
 
 ui.handlePauseClicked = function(e){
