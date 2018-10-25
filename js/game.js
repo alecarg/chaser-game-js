@@ -115,15 +115,15 @@ game.instantiatePlayers = function(){
   var playersToSpawn = game.multiplePlayers ? 7 : 1;
   for (var i = 0; i < playersToSpawn; i++) {
     var playerUid = i;
-    var playerPosX = Math.floor((Math.random() * Math.floor(10) + 5));
-    var playerPosY = 2 + i;
+    var playerPosX = Math.floor((Math.random() * Math.floor(5) + 10));
+    var playerPosY = 13 + i;
     var playerName = game.playerName || 'Player';
     players[i] = new Player(playerPosX, playerPosY, playerUid, playerName);
   }
 }
 
 game.instantiateChaser = function(){
-  chaser = new Chaser(0, 0);
+  chaser = new Chaser(0, 16);
 }
 
 game.killPlayer = function(player, reason){
