@@ -111,10 +111,10 @@ class Player {
     var playerCode = this.getPlayerCode();
 
     // Blacklisted words in code
-    var blacklistedWords = ['eval', 'window', 'document', 'console', 'alert', 'debugger', '`'];
+    var blacklistedWords = ['eval', 'window', 'document', 'console', 'alert', 'debugger', '`', 'while'];
     var isPlayerInputCodeSafe = _.every(blacklistedWords, function(word){ return (playerCode.indexOf(word) == -1) });
     if (!isPlayerInputCodeSafe){
-      return window.logger.log('Your code will not execute if you try to use eval, window, document, console, alert, debugger or the symbol ` (backtick).', 'error');
+      return window.logger.log('Your code will not execute if you try to use eval, window, document, console, alert, debugger, while or the symbol ` (backtick).', 'error');
     }
 
     // Run player's code
