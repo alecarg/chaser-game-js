@@ -24,7 +24,6 @@ class Player {
     logger.curateLog();
     this.setDistanceToChaser();
     this.runCode();
-    board.draw();
     this.checkHasDrowned();
   }
 
@@ -106,17 +105,16 @@ class Player {
       window.game.pause();
       window.game.onUnpause.push(function(){
         this.runCode();
-        board.draw(); // @todo: feels wrong, but otherwise the player moves and doesn't get shown until the next turn
       })
     }
 
     var playerCode = this.getPlayerCode();
 
     // Blacklisted words in code
-    var blacklistedWords = ['eval', 'window', 'document', 'console', 'alert', 'debugger'];
+    var blacklistedWords = ['eval', 'window', 'document', 'console', 'alert', 'debugger', '`'];
     var isPlayerInputCodeSafe = _.every(blacklistedWords, function(word){ return (playerCode.indexOf(word) == -1) });
     if (!isPlayerInputCodeSafe){
-      return window.logger.log('Your code will not execute if you try to use eval, window, document, console, alert or debugger.', 'error');
+      return window.logger.log('Your code will not execute if you try to use eval, window, document, console, alert, debugger or the symbol ` (backtick).', 'error');
     }
 
     // Run player's code
@@ -125,11 +123,17 @@ class Player {
         eval(playerCode);
       })(); // self executing function removes the 'this' reference to the player instance
     } catch (e){
-      console.log('Player code error. Player name: ' + this.name);
-      console.log(e);
+      console.log('Player code error. Player name: ' + this.name + '. ' + e);
+      var errorMsg = 'Your player code has thrown an error: ' + e + '.';
+      try {
       var errorLine = e.stack.match(/anonymous.*?\)/g)[1].replace('anonymous>', '').replace(')', '');
-      window.logger.log('Your player code has thrown an error: ' + e + '. It is located in the following line and column: ' + errorLine + '.', 'error');
+        window.logger.log(errorMsg + ' The error is located in the following line and column: ' + errorLine + '.', 'error');
+      } catch(err) {
+        window.logger.log(errorMsg + ' The error\'s line and column could not be determined. This might mean there is a missing opening/closing single tick (\').', 'error');
+      }
     }
+
+    board.draw();
   }
 
   getPlayerCode(){
