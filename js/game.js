@@ -170,7 +170,7 @@ game.timeOver = function(){
 
 game.saveCode = function(){
   var playerName = game.playerName
-  var inputCode = ui.getPlayerInputCode();
+  var inputCode = ui.getPlayerInputCode().replace(/`/g, "'");
   var gameReadyCode = `
       showdown.participants.push({
         name: '${playerName}',
