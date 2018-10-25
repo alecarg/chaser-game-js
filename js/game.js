@@ -70,7 +70,6 @@ game.onNewTurn = function(){
   game.checkTurnBasedConditions();
   game.setTurnOwner();
   game.turnOwner.onNewTurn();
-  logger.curateLog();
   game.checkIfGameOver();
 }
 

@@ -21,6 +21,7 @@ class Player {
   }
 
   onNewTurn(){
+    logger.curateLog();
     this.setDistanceToChaser();
     this.runCode();
     board.draw();
