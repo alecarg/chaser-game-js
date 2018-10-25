@@ -136,17 +136,28 @@ ui.startTimer = function() { // https://stackoverflow.com/questions/20618355/the
 
       display.textContent = minutes + ":" + seconds; 
 
+      ui.reactToTimer(diff);
+
       if (diff <= 0) {
           // restart (and add one second so that the count down starts at 
           // the full duration example 05:00 not 04:59)
           // start = Date.now() + 1000;
-
-          clearInterval(ui.timer);
-          game.timeOver();
       }
   };
 
   timer(); // we don't want to wait a full second before the timer starts
 
   ui.timer = setInterval(timer, 1000);
+}
+
+ui.reactToTimer = function(time){
+
+  if (time == 30) {
+    $('.timer').addClass('finishing');
+  }
+
+  if (time <= 0) {
+    clearInterval(ui.timer);
+    game.timeOver();
+  }
 }
