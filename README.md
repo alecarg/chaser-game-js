@@ -5,8 +5,6 @@ Dev Battle is a turn based javascript mini-game created by Alejandro Cargnelutti
 
 Video of the final showdown, where 10 people participated by creating 1 player each:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YP5VqY9DmgI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 Format of the event
 ====================
 
@@ -14,3 +12,7 @@ Format of the event
 - Five computers wait for players to sit down and participate throughout the event.
 - Towards the end of the event, all the players' code get merged into "The final showdown".
 - "The final showdown" is presented for everyone to watch, where the last person standing becomes the winner.
+
+The final showdown, as it happened
+====================
+[Watch video here](https://i9.ytimg.com/vi/YP5VqY9DmgI/mq2.jpg?sqp=CJDR4d4F&rs=AOn4CLCO9541bmRxePijzBsKa88EJzOShw)](https://www.youtube.com/watch?v=YP5VqY9DmgI)
