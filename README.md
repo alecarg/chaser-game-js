@@ -3,8 +3,6 @@ Dev Battle
 
 Dev Battle is a turn based javascript mini-game created by Alejandro Cargnelutti for the "Salmon Talks: Front End" event. In this game, you compete against other developers by coding your character in advance and giving it all the instructions it needs. Your character will then spawn in "The final showdown" with all the other players' characters, and it will attempt to survive the longest by trying to avoid being eaten by the "Chaser". Last person standing wins the £100 voucher prize.
 
-Video of the final showdown, where 10 people participated by creating 1 player each:
-
 Format of the event
 ====================
 
