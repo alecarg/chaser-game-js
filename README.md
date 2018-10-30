@@ -13,6 +13,16 @@ Format of the event
 - Towards the end of the event, all the players' code get merged into "The final showdown".
 - "The final showdown" is presented for everyone to watch, where the last person standing becomes the winner.
 
+Game screenshots
+====================
+![Dev Battle Screenshot 1](https://i.imgur.com/O8oVChq.png "Dev Battle Screenshot 1")
+![Dev Battle Screenshot 2](https://i.imgur.com/jePA0GU.png "Dev Battle Screenshot 2")
+![Dev Battle Screenshot 3](https://i.imgur.com/zcyG79M.png "Dev Battle Screenshot 3")
+
 The final showdown, as it happened
 ====================
 [![Watch video here](https://i9.ytimg.com/vi/YP5VqY9DmgI/mq2.jpg?sqp=CJDR4d4F&rs=AOn4CLCO9541bmRxePijzBsKa88EJzOShw)](https://www.youtube.com/watch?v=YP5VqY9DmgI)
+
+Demo
+====================
+In case you missed it at the top, the link to play it is: https://goo.gl/S3bS29
