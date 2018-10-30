@@ -15,4 +15,4 @@ Format of the event
 
 The final showdown, as it happened
 ====================
-[Watch video here](https://i9.ytimg.com/vi/YP5VqY9DmgI/mq2.jpg?sqp=CJDR4d4F&rs=AOn4CLCO9541bmRxePijzBsKa88EJzOShw)](https://www.youtube.com/watch?v=YP5VqY9DmgI)
+[![Watch video here](https://i9.ytimg.com/vi/YP5VqY9DmgI/mq2.jpg?sqp=CJDR4d4F&rs=AOn4CLCO9541bmRxePijzBsKa88EJzOShw)](https://www.youtube.com/watch?v=YP5VqY9DmgI)
