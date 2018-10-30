@@ -27,4 +27,4 @@ In case you missed it at the top, the link to play it is: https://goo.gl/S3bS29
 
 Build tools
 ====================
-The code for the game does not any CSS pre-processors or node processes. Portability and predictability were the main priority when considering the tools to use, as the game needed to be fully functioning in under 4 weeks of non-office hours time, as it was developed in my spare time. We used http://htmlpreview.github.io/ to serve the game directly from the repository on the different computers that we had on the day of the event.
+The code for the game does not use any CSS pre-processors or node processes. Portability and predictability were the main priorities when considering the tools to use, as the game needed to be fully functioning in under 4 weeks of non-office hours time, as it was developed in my spare time. We used http://htmlpreview.github.io/ to serve the game directly from the repository on the different computers that we had on the day of the event.
