@@ -17,9 +17,15 @@ Game screenshots
 ![Dev Battle Screenshot 2](https://i.imgur.com/jePA0GU.png "Dev Battle Screenshot 2")
 ![Dev Battle Screenshot 3](https://i.imgur.com/zcyG79M.png "Dev Battle Screenshot 3")
 
-The final showdown, as it happened
+Event: pictures
 ====================
-[![Watch video here](https://i9.ytimg.com/vi/YP5VqY9DmgI/mq2.jpg?sqp=CJDR4d4F&rs=AOn4CLCO9541bmRxePijzBsKa88EJzOShw)](https://www.youtube.com/watch?v=YP5VqY9DmgI)
+![Dev Battle Screenshot 4](https://i.imgur.com/DZOvo7Kg.jpg "Dev Battle Screenshot 4")
+![Dev Battle Screenshot 5](https://i.imgur.com/JitVLM9.jpg "Dev Battle Screenshot 5")
+![Dev Battle Screenshot 6](https://i.imgur.com/AiXzgYqg.jpg "Dev Battle Screenshot 6")
+
+Event: as it happened, "The final showdown"
+====================
+[![Watch video here](https://i.imgur.com/W1p1ILm.jpg)](https://www.youtube.com/watch?v=YP5VqY9DmgI)
 
 Demo
 ====================
