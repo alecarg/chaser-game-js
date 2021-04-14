@@ -29,7 +29,7 @@ Event: as it happened, "The final showdown"
 
 Demo
 ====================
-In case you missed it at the top, the link to play it is: https://goo.gl/S3bS29
+In case you missed it at the top, the link to play it is: https://cutt.ly/tvivxBU (previously https://goo.gl/S3bS29)
 
 Build tools
 ====================
